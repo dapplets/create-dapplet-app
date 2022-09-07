@@ -1,0 +1,25 @@
+{
+  "name": "create-dapplet-app-test-0304",
+  "version": "1.0.0",
+  "main": "index.js",
+  "bin": {
+    "dapplet-module-template": "index.js"
+  },
+  "scripts": {
+    "interface": "node index.js"
+  },
+  "author": "Dapplets Team <contact@dapplets.org>",
+  "license": "MIT",
+  "preferGlobal": true,
+  "dependencies": {
+    "express": "4.18.1",
+    "express-ws": "5.0.2",
+    "arg": "^4.1.0",
+    "esm": "^3.2.18",
+    "inquirer": "^6.2.2",
+    "listr": "^0.14.3",
+    "ncp": "^2.0.0"
+  },
+  "devDependencies": {},
+  "description": ""
+}
