@@ -1,0 +1,17 @@
+{
+  "name": { "$ref": "package.json#/name" },
+  "branch": "default",
+  "version": { "$ref": "package.json#/version" },
+  "type": "FEATURE",
+  "title": "example-dapplet-template",
+  "description": { "$ref": "package.json#/description" },
+  "main": { "$ref": "package.json#/main" },
+  "icon": "src/icons/no-logo.png",
+  "contextIds": ["twitter-adapter.dapplet-base.eth"],
+  "overlays": {
+    "overlay": "https://localhost:3000"
+  },
+  "dependencies": {
+    "twitter-adapter.dapplet-base.eth": "0.9.0"
+  }
+}
