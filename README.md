@@ -3,8 +3,8 @@
 
 ## Getting Started
 
-1.  `npm i`
-2.  `dapplet-module-template` to run.
+1.  `npm i create-dapplet-app-test-0304`
+2.  `dapplet-module-template-start` to run.
 
 
 ### Building
