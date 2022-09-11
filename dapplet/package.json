@@ -4,10 +4,10 @@
   "description": "",
   "main": "",
   "scripts": {
-    "postinstall": "concurrently -c magenta,cyan -n dapplet,overlay \"npm run install:dapplet\" \"npm run install:overlay\"",
+    "postinstall": "concurrently -c \"magenta,cyan\" -n \"dapplet,overlay\" \"npm run install:dapplet\" \"npm run install:overlay\"",
     "install:dapplet": "cd dapplet && npm i",
     "install:overlay": "cd overlay && npm i",
-    "start": "concurrently -arc magenta,cyan -n dapplet,overlay \"npm run start:dapplet\" \"npm run start:overlay\"",
+    "start": "concurrently -c \"magenta,cyan\" -n \"dapplet,overlay\" \"npm run start:dapplet\" \"npm run start:overlay\"",
     "start:dapplet": "cd dapplet && npm start",
     "start:overlay": "cd overlay && npm start",
     "prettier": "npx prettier --write ."
@@ -16,17 +16,19 @@
     "dapplet/node_modules",
     "overlay/node_modules"
   ],
+  "author": "",
+  "license": "",
   "devDependencies": {
+    "@types/animejs": "^3.1.5",
     "concurrently": "^6.5.1",
     "prettier": "2.2.1"
   },
-  "bugs": {
-    "url": "https://github.com/dapplets/dapplets-eth-example/issues"
-  },
+
   "dependencies": {
-    "@dapplets/dapplet-extension": "latest",
+    "@dapplets/dapplet-extension": "^0.47.3",
     "@dapplets/dapplet-overlay-bridge": "^0.1.0",
     "@types/classnames": "^2.3.1",
+    "@types/react-copy-to-clipboard": "^5.0.2",
     "rollup-plugin-typescript": "^1.0.1",
     "svg-react-loader": "^0.4.6",
     "webpack": "^5.67.0"

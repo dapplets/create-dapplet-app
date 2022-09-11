@@ -1,13 +1,16 @@
 {
-  "name": "example-dapplet-template",
+  "name": "",
   "version": "0.1.0",
-  "description": "example-dapplet-template",
+  "description": "",
   "main": "lib/index.js",
   "scripts": {
     "start": "rollup -w --config rollup.config.js",
     "build": "rollup --config rollup.config.js",
     "linter": "npx eslint ."
   },
+  
+  "author": "",
+  "license": "",
   "devDependencies": {
     "@dapplets/dapplet-extension": "latest",
     "@rollup/plugin-commonjs": "^17.1.0",

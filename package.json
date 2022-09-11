@@ -1,6 +1,6 @@
 {
   "name": "create-dapplet-app-test-0304",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "index.js",
   "bin": {
     "dapplet-module-template-start": "index.js"

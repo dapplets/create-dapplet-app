@@ -1,7 +1,5 @@
 import React, {} from 'react';
-import {} from '@dapplets/dapplet-extension';
 import Bridge, { IDappStateProps } from '@dapplets/dapplet-overlay-bridge';
-
 
 interface IStorage {
   userAccount: string;
@@ -10,49 +8,43 @@ interface IStorage {
 interface IBridge {
   login: () => Promise<void>;
   logout: () => Promise<void>;
- 
 }
-
-
 
 const App = (props: IDappStateProps<IStorage>) => {
   const { sharedState } = props;
   const bridge = new Bridge<IBridge>();
 
-const handleLogIn = async (e: any) => {
+  const handleLogIn = (e: any) => {
     e.preventDefault();
-    const res = await bridge.login();
-
+    bridge.login();
   };
 
-  const handleLogOut = async (e: any) => {
+  const handleLogOut = (e: any) => {
     e.preventDefault();
-    const res = await bridge.logout();
-
+    bridge.logout();
   };
- 
-  
 
 
   return (
     sharedState && (
-      <div className='wrapper' >
+      <div className='wrapper'>
         <div className="title">
-          <h1>example-dapplet-template</h1>
-          <h2>example-dapplet-template</h2>
+          <h2>Overlay</h2>
+          <h1>Overlay</h1>
         </div>
-         {sharedState.global?.userAccount==="" ? (
+         {sharedState.global?.userAccount === "" ? (
           <button
             className="login"
             onClick={handleLogIn}
-        
           >
-            Log in to my account
+            Log in
           </button>
         ) : (
           <>
-            <h3>Account name:</h3>
-            <p >{sharedState.global?.userAccount}</p>
+            <section style={{ marginBottom: '2rem' }}>
+              <h4>Account name:</h4>
+              <p >{sharedState.global?.userAccount}</p>
+            </section>
             <button
               className="logout"
               onClick={handleLogOut}

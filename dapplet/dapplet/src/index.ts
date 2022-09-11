@@ -16,17 +16,17 @@ export default class TwitterFeature {
     state: this.state,
   });
 
-  private overlay = Core.overlay<IBridge>({ name: 'overlay', title: 'example-dapplet-template' })
-    .useState(this.state)
-    .declare(this.api);
+  private overlay = Core.overlay<IBridge>({ name: 'overlay', title: '' })
 
+    .useState(this.state)
+  
+    .declare(this.api);
     
   async activate(): Promise<void> {
     await this.api.initializeCurrentAccount();
-      Core.onAction(() => {
+    Core.onAction(() => {
       this.overlay.open()
       this.api.initializeCurrentAccount();
     });
-    this.adapter.attachConfig({})
   }
 }
