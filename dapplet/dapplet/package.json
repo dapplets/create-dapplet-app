@@ -4,7 +4,8 @@
   "description": "",
   "main": "lib/index.js",
   "scripts": {
-    "start": "rollup -w --config rollup.config.js",
+    "postinstall": "cd server && npm i",
+    "start": "concurrently -c \"yellow,blue\" -n \"dapplet,server\" \"rollup -w --config rollup.config.js && cd server && node .\" \"cd server && node .\"",
     "build": "rollup --config rollup.config.js",
     "linter": "npx eslint ."
   },

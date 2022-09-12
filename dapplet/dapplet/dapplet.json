@@ -8,6 +8,10 @@
   "main": { "$ref": "package.json#/main" },
   "icon": "src/icons/no-logo.png",
   "contextIds": ["twitter-adapter.dapplet-base.eth"],
+  "config": {
+    "schema": "config/schema.json",
+    "default": "config/default.json"
+  },
   "overlays": {
     "overlay": "https://localhost:3000"
   },
