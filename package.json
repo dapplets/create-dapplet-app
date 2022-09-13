@@ -20,6 +20,5 @@
     "listr": "^0.14.3",
     "ncp": "^2.0.0"
   },
-  "devDependencies": {},
   "description": "creating modules"
 }

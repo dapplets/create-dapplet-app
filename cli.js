@@ -147,7 +147,7 @@ async function promptForMissingOptionsDapplets(options) {
       ...options,
       template: options.template || defaultTemplate,
       description: options.optionsDappletDescription || "",
-      context: options.optionsContextID || "",
+      context: options.optionsContextID || null,
     };
   }
 
@@ -184,7 +184,6 @@ async function promptForMissingOptionsDapplets(options) {
       type: "string",
       name: "context",
       message: "add ContextID separated by commas",
-      default: "",
     });
   }
 
@@ -229,7 +228,7 @@ async function promptForMissingOptionsAdapter(options) {
     return {
       ...options,
       template: options.template || defaultTemplate,
-      context: options.optionsContextID || "",
+      context: options.optionsContextID || null,
     };
   }
 
@@ -240,7 +239,6 @@ async function promptForMissingOptionsAdapter(options) {
       type: "string",
       name: "context",
       message: "add ContextIDs separated by commas",
-      default: "",
     });
   }
 

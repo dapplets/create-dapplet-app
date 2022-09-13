@@ -1,6 +1,8 @@
 import { } from '@dapplets/dapplet-extension';
-import { Api } from './api';
-import { IBridge, IStorage } from './types';
+// ! overlay
+// import { Api } from './api';
+// import { IBridge, IStorage } from './types';
+// ! overlay
 
 
 @Injectable
@@ -10,13 +12,16 @@ export default class TwitterFeature {
   @Inject('')
   public adapter: any;
 
-  private state = Core.state<IStorage>({
-    userAccount: '',
-  });
+  // ! overlay
+  // private state = Core.state<IStorage>({
+  //   userAccount: '',
+  // });
 
-  private api = new Api({
-    state: this.state,
-  });
+  // private api = new Api({
+  //   state: this.state,
+  // });
+  // ! overlay
+
 // ! overlay
   // private overlay = Core.overlay<IBridge>({ name: 'overlay', title: '' })
   //   .useState(this.state)

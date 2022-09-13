@@ -10,10 +10,11 @@ import {
   yesServerYesOverlay,
   optionsAdapter,
   createAdapter,
-  createInterface
+  createInterface,createContext
 } from "./utils";
 
 function createModule(template, name, author, license,title,description, options) {
+  const context = options.optionsContextID ? options.optionsContextID.split(","): null;
   ncp(__dirname + `/${template}`, `./${name}`, function (err) {
     const json1 = readFileSync(`./${name}/package.json`, "utf8");
     const object = JSON.parse(json1);
@@ -24,7 +25,7 @@ function createModule(template, name, author, license,title,description, options
     const json2 = JSON.stringify(object);
     writeFileSync(`./${name}/package.json`, json2);
     updateConfiguration(name, options, template);
-    updateScript(name,title,description, options,author,license, template);
+    updateScript(name,title,description, options,author,license, template,context);
     if (err) {
       return console.error(err);
     }
@@ -39,7 +40,7 @@ function updateConfiguration(moduleName, options, template) {
 
   options.optionsDappletServer && template === "dapplet"
     ? null
-    : fs.rmSync(`./${moduleName}/dapplet/server`, {
+    : fs.rmSync(`./${moduleName}/server`, {
         recursive: true,
         force: true,
       });
@@ -48,7 +49,7 @@ function updateConfiguration(moduleName, options, template) {
     ? null
     : fs.rmSync(`./${moduleName}/overlay`, { recursive: true, force: true });
 }
-function updateScript(moduleName,title,description, options,author,license, template) {
+function updateScript(moduleName,title,description, options,author,license, template,context) {
   if (
     !options.optionsDappletServer &&
     !options.optionsDappletOverlay &&
@@ -62,14 +63,14 @@ function updateScript(moduleName,title,description, options,author,license, temp
     options.optionsDappletOverlay &&
     template === "dapplet"
   ) {
-    yesServerNotOverlay(moduleName,title,description, author,license);
+    notServerYesOverlay(moduleName,title,description, author,license);
     options.optionsDappletAdapter ?optionsAdapter(moduleName): null
   } else if (
     options.optionsDappletServer &&
     !options.optionsDappletOverlay &&
     template === "dapplet"
   ) {
-    notServerYesOverlay(moduleName,title,description, author,license);
+    yesServerNotOverlay(moduleName,title,description, author,license);
     options.optionsDappletAdapter ?optionsAdapter(moduleName): null
     
   } else if (
@@ -87,6 +88,7 @@ function updateScript(moduleName,title,description, options,author,license, temp
   else if(template === "interface"){
     createInterface(moduleName,title)
   }
+  createContext(template,moduleName,context);
 }
 
 export async function createProject(options, packageInfo) {
@@ -99,7 +101,6 @@ export async function createProject(options, packageInfo) {
   const licenseProject = packageInfo.license.toUpperCase();
   const titleProject = packageInfo.title;
   const descriptionProject = packageInfo.description;
-
   const tasks = new Listr(
     [
       {

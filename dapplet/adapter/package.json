@@ -20,7 +20,6 @@
     "typescript": "^4.5.5"
   },
   "dependencies": {
-    "slideout": "^1.0.1",
     "lit": "^2.2.1"
   }
 }
