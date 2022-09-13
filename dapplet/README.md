@@ -1,6 +1,6 @@
 # Dapplet
 
-This adapter for Google Search is created with **create-dapplet-app**
+This project was bootstrapped with [Create React App](https://github.com/dapplets/create-dapplet-app)
 
 
 ## Getting Started
@@ -22,15 +22,15 @@ Open the file './dapplet/src/intex.ts. Uncomment the lines.
    ```js
     ...
     @Injectable
-    export default class GoogleFeature {
+    export default class Adapter {
 
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
-    @Inject('example-google-adapter.dapplet-base.eth') public adapter: any;
+    @Inject('template-adapter') public adapter: any;
     }
     ...
 ```
 
- To use google adapter comment out or remove default adapter usage.
+ To use adapter comment out or remove default adapter usage.
 
 ```js
     ...
@@ -68,7 +68,7 @@ If you have selected the additional option **server**, open the file './dapplet/
 ...
  ```
 
-## Authors
+## Learn more
 
 * **Dapplets Project** - [dapplets site](https://dapplets.org/)
 * **Documentation** - [documentation](https://docs.dapplets.org/docs/)

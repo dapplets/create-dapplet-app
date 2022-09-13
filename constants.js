@@ -48,10 +48,6 @@ export const scriptsDefault = {
         "webpack": "^5.67.0"
   }
 
-  export const contextIdsAdapter =[
-    "twitter-adapter.dapplet-base.eth",
-    "example-google-adapter.dapplet-base.eth"
-  ]
 
   export const dependenciesWithAdapter = {
     "example-google-adapter.dapplet-base.eth": "0.2.0",

@@ -1,6 +1,5 @@
 import { IFeature } from '@dapplets/dapplet-extension';
-import { Button } from './button';
-import { Result } from './result';
+import { WbButton, IWbButtonProps } from './wb-button';
 
 type ContextBuilder = {
   [propName: string]: string;
@@ -11,82 +10,51 @@ type Exports = {
 };
 
 @Injectable
-export default class GoogleAdapter {
+export default class Adapter {
   public exports = (): Exports => ({
-    button: this.adapter.createWidgetFactory(Button),
-    result: this.adapter.createWidgetFactory(Result),
+    button: this.adapter.createWidgetFactory(WbButton),
   });
 
+  
   public config = {
-    MENU: {
-      containerSelector: '#cnt, .ndYZfc',
-      contextSelector: '#top_nav, #topstuff .jZWadf',
+    POST: {
+      containerSelector: '',
+      contextSelector: '',
       insPoints: {
-        MENU: {
-          selector: '.MUFPAc, .T47uwc',
-          insert: 'inside',
+        POST: {
+          selector: '',
+          insert: '',
         },
       },
-      contextBuilder: (): ContextBuilder => ({
-        id: '',
-        insertPoint: '#rcnt, .mJxzWe',
-      }),
+      contextBuilder: (): ContextBuilder => ({}),
     },
-    SEARCH_RESULT: {
-      containerSelector: '#search',
-      contextSelector: '#rso > .g .jtfYYd, #rso > div > .g .jtfYYd, #rso > div > div > .g .jtfYYd, .MjjYud',
+    QUOTE_POST: {
+      containerSelector: '',
+      contextSelector: '',
       insPoints: {
-        SEARCH_RESULT: {
-          selector: '.yuRUbf',
-          insert: 'inside',
+        QUOTE_POST: {
+          selector: '',
+          insert: '',
         },
       },
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      contextBuilder: (searchNode: any): ContextBuilder => ({
-        id: searchNode.querySelector('.yuRUbf > a')?.href,
-        title: searchNode.querySelector('h3')?.textContent,
-        link: searchNode.querySelector('.yuRUbf > a')?.href,
-        description:
-          searchNode.querySelector('.uUuwM')?.textContent ||
-          searchNode.querySelector('.IsZvec')?.textContent,
-      }),
+      contextBuilder: (): ContextBuilder => ({}),
     },
-    WIDGETS: {
-      containerSelector: '#search',
-      contextSelector: '#rso',
+    PROFILE: {
+      containerSelector: '',
+      contextSelector: '',
       insPoints: {
-        WIDGETS: {
-          selector: '.ULSxyf',
-          insert: 'begin',
+        PROFILE: {
+          selector: '',
+          insert: '',
         },
       },
-      contextBuilder: (): ContextBuilder => ({
-        id: '',
-      }),
-    },
-     DAPPLET_SEARCH_RESULT: {
-      containerSelector: '#search',
-      contextSelector: '.hlcw0c-dapp .tF2Cxc',
-      insPoints: {
-        DAPPLET_SEARCH_RESULT: {
-          selector: '.yuRUbf',
-          insert: 'inside',
-        },
-      },
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      contextBuilder: (searchNode: any): ContextBuilder => ({
-        id: searchNode.querySelector('.yuRUbf > a').href,
-        title: searchNode.querySelector('h3 > span').textContent,
-        link: searchNode.querySelector('.yuRUbf > a').href,
-        description: searchNode.querySelector('.IsZvec').textContent,
-      }),
+      contextBuilder: (): ContextBuilder => ({}),
     },
 
   };
 
 
   constructor(
-    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
     @Inject('dynamic-adapter.dapplet-base.eth') readonly adapter: any,
   ) {
     this.adapter.configure(this.config);

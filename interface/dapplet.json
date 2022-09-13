@@ -3,7 +3,7 @@
   "branch": "default",
   "version": { "$ref": "package.json#/version" },
   "type": "INTERFACE",
-  "title": "Virtual Adapter Example",
+  "title": "",
   "description": { "$ref": "package.json#/description" },
   "main": { "$ref": "package.json#/main" }
 }

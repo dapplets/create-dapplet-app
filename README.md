@@ -3,8 +3,12 @@
 
 ## Getting Started
 
-1.  `npm i create-dapplet-app-test-0304 -g`
-2.  `dapplet-module-template-start` to run.
+```bash
+
+npm i create-dapplet-app-test-0304 -g
+dapplet-module-template-start
+
+```
 
 
 ### Building

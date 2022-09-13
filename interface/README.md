@@ -1,7 +1,7 @@
 
 # Interface
 
-This interface is created with **create-dapplet-app**
+This project was bootstrapped with [Create React App](https://github.com/dapplets/create-dapplet-app)
 
 
 ## Getting Started
@@ -12,9 +12,9 @@ This interface is created with **create-dapplet-app**
 
 ### Building
 
-1.  `npm start` - building the module.
+1.  `npm build` - building the module.
 
-## Authors
+## Learn more
 
 * **Dapplets Project** - [dapplets site](https://dapplets.org/)
 * **Documentation** - [documentation](https://docs.dapplets.org/docs/)

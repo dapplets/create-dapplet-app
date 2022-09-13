@@ -5,7 +5,9 @@ import { IBridge, IStorage } from './types';
 
 @Injectable
 export default class TwitterFeature {
-  @Inject('twitter-adapter.dapplet-base.eth')
+  // Here you need to specify the name of the adapter to use, and also add it to the dapplet manifest in "dependencies" and "context IDs"
+  // Learn more - https://docs.dapplets.org/docs/manifest
+  @Inject('')
   public adapter: any;
 
   private state = Core.state<IStorage>({
@@ -37,9 +39,4 @@ export default class TwitterFeature {
   }
 }
 
-// @Injectable
-// export default class GoogleFeature {
 
-//   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
-//   @Inject('example-google-adapter.dapplet-base.eth') public adapter: any;
-// }

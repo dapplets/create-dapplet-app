@@ -7,7 +7,7 @@
   "description": { "$ref": "package.json#/description" },
   "main": { "$ref": "package.json#/main" },
   "icon": "src/icons/no-logo.png",
-  "contextIds": ["twitter-adapter.dapplet-base.eth"],
+  "contextIds": [],
   "config": {
     "schema": "config/schema.json",
     "default": "config/default.json"
