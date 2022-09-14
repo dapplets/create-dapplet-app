@@ -8,13 +8,13 @@ import {
   yesServerNotOverlay,
   notServerYesOverlay,
   yesServerYesOverlay,
-  optionsAdapter,
+  optionsAdapterNotServerNotOverlay,
   createAdapter,
-  createInterface,createContext
+  createInterface, createContext, optionsNoAdapterNotServerNotOverlay, optionsAdapterNotServerYesOverlay, optionsNoAdapterNotServerYesOverlay, optionsAdapterYesServerNotOverlay, optionsNoAdapterYesServerNotOverlay, optionsAdapterYesServerYesOverlay, optionsNoAdapterYesServerYesOverlay
 } from "./utils";
 
-function createModule(template, name, author, license,title,description, options) {
-  const context = options.optionsContextID ? options.optionsContextID.split(","): null;
+function createModule(template, name, author, license, title, description, options) {
+  const context = options.optionsContextID ? options.optionsContextID.split(",") : null;
   ncp(__dirname + `/${template}`, `./${name}`, function (err) {
     const json1 = readFileSync(`./${name}/package.json`, "utf8");
     const object = JSON.parse(json1);
@@ -25,7 +25,7 @@ function createModule(template, name, author, license,title,description, options
     const json2 = JSON.stringify(object);
     writeFileSync(`./${name}/package.json`, json2);
     updateConfiguration(name, options, template);
-    updateScript(name,title,description, options,author,license, template,context);
+    updateScript(name, title, description, options, author, license, template, context);
     if (err) {
       return console.error(err);
     }
@@ -41,54 +41,54 @@ function updateConfiguration(moduleName, options, template) {
   options.optionsDappletServer && template === "dapplet"
     ? null
     : fs.rmSync(`./${moduleName}/server`, {
-        recursive: true,
-        force: true,
-      });
+      recursive: true,
+      force: true,
+    });
 
   options.optionsDappletOverlay && template === "dapplet"
     ? null
     : fs.rmSync(`./${moduleName}/overlay`, { recursive: true, force: true });
 }
-function updateScript(moduleName,title,description, options,author,license, template,context) {
+function updateScript(moduleName, title, description, options, author, license, template, context) {
   if (
     !options.optionsDappletServer &&
     !options.optionsDappletOverlay &&
     template === "dapplet"
   ) {
-    notOverlayNotServer(moduleName,title,description, author,license);
+    notOverlayNotServer(moduleName, title, description, author, license);
 
-    options.optionsDappletAdapter ?optionsAdapter(moduleName): null
+    options.optionsDappletAdapter ? optionsAdapterNotServerNotOverlay(moduleName) : optionsNoAdapterNotServerNotOverlay(moduleName);
   } else if (
     !options.optionsDappletServer &&
     options.optionsDappletOverlay &&
     template === "dapplet"
   ) {
-    notServerYesOverlay(moduleName,title,description, author,license);
-    options.optionsDappletAdapter ?optionsAdapter(moduleName): null
+    notServerYesOverlay(moduleName, title, description, author, license);
+    options.optionsDappletAdapter ? optionsAdapterNotServerYesOverlay(moduleName) : optionsNoAdapterNotServerYesOverlay(moduleName)
   } else if (
     options.optionsDappletServer &&
     !options.optionsDappletOverlay &&
     template === "dapplet"
   ) {
-    yesServerNotOverlay(moduleName,title,description, author,license);
-    options.optionsDappletAdapter ?optionsAdapter(moduleName): null
-    
+    yesServerNotOverlay(moduleName, title, description, author, license);
+    options.optionsDappletAdapter ? optionsAdapterYesServerNotOverlay(moduleName) : optionsNoAdapterYesServerNotOverlay(moduleName)
+
   } else if (
     options.optionsDappletServer &&
     options.optionsDappletOverlay &&
     template === "dapplet"
   ) {
-    yesServerYesOverlay(moduleName,title,description, author,license);
+    yesServerYesOverlay(moduleName, title, description, author, license);
 
-    options.optionsDappletAdapter ?optionsAdapter(moduleName): null
+    options.optionsDappletAdapter ? optionsAdapterYesServerYesOverlay(moduleName) : optionsNoAdapterYesServerYesOverlay(moduleName);
   }
-  else if(template === "adapter"){
-    createAdapter(moduleName,title)
+  else if (template === "adapter") {
+    createAdapter(moduleName, title)
   }
-  else if(template === "interface"){
-    createInterface(moduleName,title)
+  else if (template === "interface") {
+    createInterface(moduleName, title)
   }
-  createContext(template,moduleName,context);
+  createContext(template, moduleName, context);
 }
 
 export async function createProject(options, packageInfo) {
@@ -116,7 +116,7 @@ export async function createProject(options, packageInfo) {
             options
           );
         },
-        skip: () => {},
+        skip: () => { },
       },
     ],
     {

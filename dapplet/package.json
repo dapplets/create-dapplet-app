@@ -4,20 +4,23 @@
   "description": "",
   "main": "",
   "scripts": {
-    "postinstall": "concurrently -c \"magenta,cyan\" -n \"dapplet,overlay,server\" \"npm run install:dapplet\" \"npm run install:overlay\" \"npm run install:server\"",
+    "postinstall": "concurrently -c \"magenta,cyan\" -n \"dapplet,overlay,server,adapter\" \"npm run install:dapplet\" \"npm run install:overlay\" \"npm run install:server\" \"npm run install:adapter\"",
     "install:dapplet": "cd dapplet && npm i",
     "install:overlay": "cd overlay && npm i",
     "install:server": "cd server && npm i",
-    "start": "concurrently -c \"magenta,cyan\" -n \"dapplet,overlay,server\" \"npm run start:dapplet\" \"npm run start:overlay\" \"npm run start:server\"",
+    "install:adapter": "cd adapter && npm i",
+    "start": "concurrently -c \"magenta,cyan\" -n \"dapplet,overlay,server,adapter\" \"npm run start:dapplet\" \"npm run start:overlay\" \"npm run start:server\" \"npm run start:adapter\"",
     "start:dapplet": "cd dapplet && npm start",
     "start:overlay": "cd overlay && npm start",
     "start:server": "cd server && npm start",
+    "start:adapter": "cd adapter && npm start",
     "prettier": "npx prettier --write ."
   },
   "cacheDirectories": [
     "dapplet/node_modules",
     "overlay/node_modules",
-    "server/node_modules"
+    "server/node_modules",
+    "adapter/node_modules"
   ],
   "author": "",
   "license": "",
