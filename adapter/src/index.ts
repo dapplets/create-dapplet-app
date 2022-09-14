@@ -12,7 +12,7 @@ type Exports = {
 @Injectable
 export default class Adapter {
   public exports = (): Exports => ({
-    button: this.adapter.createWidgetFactory(WbButton),
+    WbButton: this.adapter.createWidgetFactory(WbButton),
   });
 
   
@@ -22,28 +22,6 @@ export default class Adapter {
       contextSelector: '',
       insPoints: {
         POST: {
-          selector: '',
-          insert: '',
-        },
-      },
-      contextBuilder: (): ContextBuilder => ({}),
-    },
-    QUOTE_POST: {
-      containerSelector: '',
-      contextSelector: '',
-      insPoints: {
-        QUOTE_POST: {
-          selector: '',
-          insert: '',
-        },
-      },
-      contextBuilder: (): ContextBuilder => ({}),
-    },
-    PROFILE: {
-      containerSelector: '',
-      contextSelector: '',
-      insPoints: {
-        PROFILE: {
           selector: '',
           insert: '',
         },

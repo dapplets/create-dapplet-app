@@ -18,62 +18,35 @@ function parseArgumentsIntoOptions(rawArgs) {
   );
   return {
     skipPrompts: args["--yes"] || false,
-    template: args._[0],
-    name: args._[0],
+    type: args._[0],
     author: args._[0],
     license: args._[0],
-    title: args._[0],
-    optionsDappletAdapter: args["--choice"] || false,
-    optionsDappletServer: args["--choice"] || false,
-    optionsDappletOverlay: args["--choice"] || false,
-    optionsContextID: args._[0],
     description: args._[0],
   };
 }
 
 async function promptForMissingOptions(options) {
-  const defaultTemplate = "dapplet";
-  const defaultName = "dapplet-module";
+  const defaultType = "dapplet";
 
   if (options.skipPrompts) {
     return {
       ...options,
-      template: options.template || defaultTemplate,
-      name: options.name || defaultName,
+      type: options.type || defaultType,
       author: options.author || "",
       license: options.license || "",
-      title: options.title || defaultName,
       description : options.description || ''
     };
   }
 
   const questions = [];
 
-  if (!options.template) {
+  if (!options.type) {
     questions.push({
       type: "list",
-      name: "template",
-      message: "Please choose which project install",
+      name: "type",
+      message: "Please select project type",
       choices: ["adapter", "interface", "dapplet"],
-      default: defaultTemplate,
-    });
-  }
-
-  if (!options.name) {
-    questions.push({
-      type: "string",
-      name: "name",
-      message: "Please enter name project",
-      default: defaultName,
-    });
-  }
-
-  if (!options.title) {
-    questions.push({
-      type: "string",
-      name: "title",
-      message: "Please enter title module (display name in extension)",
-      default: defaultName,
+      default: defaultType,
     });
   }
 
@@ -98,7 +71,7 @@ async function promptForMissingOptions(options) {
     questions.push({
       type: "string",
       name: "description",
-      message: "add description module",
+      message: "Please enter module description",
       default: "",
     });
   }
@@ -107,11 +80,9 @@ async function promptForMissingOptions(options) {
   const answers = await inquirer.prompt(questions);
   return {
     ...options,
-    template: options.template || answers.template,
-    name: options.name || answers.name,
+    type: options.type || answers.type,
     author: options.author || answers.author,
-    license: options.license || answers.license,
-    title: options.title || answers.title,
+    license: options.license || answers.license, 
     description: options.description  || answers.description
   };
 }
@@ -132,7 +103,9 @@ function parseArgumentsIntoOptionsDapplets(rawArgs) {
   );
   return {
     skipPrompts: args["--yes"] || false,
-    template: args._[0],
+    type: args._[0],
+    name: args._[0],
+    title: args._[0],
     optionsDappletAdapter: args["--choice"] || false,
     optionsDappletServer: args["--choice"] || false,
     optionsDappletOverlay: args["--choice"] || false,
@@ -141,11 +114,14 @@ function parseArgumentsIntoOptionsDapplets(rawArgs) {
 }
 
 async function promptForMissingOptionsDapplets(options) {
-  const defaultTemplate = "dapplet";
+  const defaultType = "dapplet";
+  const defaultName = "dapplet-module";
   if (options.skipPrompts) {
     return {
       ...options,
-      template: options.template || defaultTemplate,
+      type: options.type || defaultType,
+      name: options.name || defaultName,
+      title: options.title || defaultName,
       description: options.optionsDappletDescription || "",
       context: options.optionsContextID || null,
     };
@@ -153,11 +129,29 @@ async function promptForMissingOptionsDapplets(options) {
 
   const questions = [];
 
+  if (!options.name) {
+    questions.push({
+      type: "string",
+      name: "name",
+      message: "Please enter name project",
+      default: defaultName,
+    });
+  }
+
+  if (!options.title) {
+    questions.push({
+      type: "string",
+      name: "title",
+      message: "Please enter title module (display name in extension)",
+      default: defaultName,
+    });
+  }
+
   if (!options.optionsDappletAdapter) {
     questions.push({
       type: "confirm",
       name: "adapter",
-      message: "add adapter?",
+      message: "Add adapter?",
       default: false,
     });
   }
@@ -166,7 +160,7 @@ async function promptForMissingOptionsDapplets(options) {
     questions.push({
       type: "confirm",
       name: "server",
-      message: "add server?",
+      message: "Add server?",
       default: false,
     });
   }
@@ -174,7 +168,7 @@ async function promptForMissingOptionsDapplets(options) {
     questions.push({
       type: "confirm",
       name: "overlay",
-      message: "add overlay?",
+      message: "Add overlay?",
       default: false,
     });
   }
@@ -183,17 +177,17 @@ async function promptForMissingOptionsDapplets(options) {
     questions.push({
       type: "string",
       name: "context",
-      message: "add ContextID separated by commas",
+      message: "Please add ContextID separated by spaces",
     });
   }
-
-
 
   const answers = await inquirer.prompt(questions);
 
   return {
     ...options,
-    template: "dapplet",
+    type: "dapplet",
+    name: options.name || answers.name,
+    title: options.title || answers.title,
     optionsDappletAdapter: options.optionsDappletAdapter || answers.adapter,
     optionsDappletServer: options.optionsDappletServer || answers.server,
     optionsDappletOverlay: options.optionsDappletOverlay || answers.overlay,
@@ -217,28 +211,51 @@ function parseArgumentsIntoOptionsAdapter(rawArgs) {
   );
   return {
     skipPrompts: args["--yes"] || false,
-    template: args._[0],
+    type: args._[0],
+    name: args._[0],
+    title: args._[0],
     optionsContextID: args._[0],
   };
 }
 
 async function promptForMissingOptionsAdapter(options) {
-  const defaultTemplate = "adapter";
+  const defaultType = "adapter";
+  const defaultName = "my-adapter";
   if (options.skipPrompts) {
     return {
       ...options,
-      template: options.template || defaultTemplate,
+      type: options.type || defaultType,
+      name: options.name || defaultName,
+      title: options.title || defaultName,
       context: options.optionsContextID || null,
     };
   }
 
   const questions = [];
 
+  if (!options.name) {
+    questions.push({
+      type: "string",
+      name: "name",
+      message: "Please enter name project",
+      default: defaultName,
+    });
+  }
+
+  if (!options.title) {
+    questions.push({
+      type: "string",
+      name: "title",
+      message: "Please enter title module (display name in extension)",
+      default: defaultName,
+    });
+  }
+
   if (!options.optionsContextID) {
     questions.push({
       type: "string",
       name: "context",
-      message: "add ContextIDs separated by commas",
+      message: "Please add ContextID separated by spaces",
     });
   }
 
@@ -246,25 +263,94 @@ async function promptForMissingOptionsAdapter(options) {
 
   return {
     ...options,
-    template: "adapter",
+    type: "adapter",
+    name: options.name || answers.name,
+    title: options.title || answers.title,
     optionsContextID: options.optionsContextID || answers.context,
+  };
+}
+
+function parseArgumentsIntoOptionsInterface(rawArgs) {
+  const args = arg(
+    {
+      "--choice": Boolean,
+      "--yes": Boolean,
+      "--install": Boolean,
+      "-g": "--choice",
+      "-y": "--yes",
+      "-i": "--install",
+    },
+    {
+      argv: rawArgs.slice(2),
+    }
+  );
+  return {
+    skipPrompts: args["--yes"] || false,
+    type: args._[0],
+    name: args._[0],
+    title: args._[0],
+  };
+}
+
+async function promptForMissingOptionsInterface(options) {
+  const defaultType = "interface";
+  const defaultName = "my-virtual-adapter";
+  if (options.skipPrompts) {
+    return {
+      ...options,
+      type: options.type || defaultType,
+      name: options.name || defaultName,
+      title: options.title || defaultName,
+    };
+  }
+
+  const questions = [];
+
+  if (!options.name) {
+    questions.push({
+      type: "string",
+      name: "name",
+      message: "Please enter name project",
+      default: defaultName,
+    });
+  }
+
+  if (!options.title) {
+    questions.push({
+      type: "string",
+      name: "title",
+      message: "Please enter title module (display name in extension)",
+      default: defaultName,
+    });
+  }
+  
+
+  const answers = await inquirer.prompt(questions);
+
+  return {
+    ...options,
+    type: "interface",
+    name: options.name || answers.name,
+    title: options.title || answers.title,
   };
 }
 
 export async function cli(args) {
   let options = parseArgumentsIntoOptions(args);
   options = await promptForMissingOptions(options);
-  if (options.template === "interface") {
-    await createProject(options, options);
-  } else if(options.template === "adapter"){
-    let optionsAdapter = parseArgumentsIntoOptionsAdapter(args);
-    optionsAdapter = await promptForMissingOptionsAdapter(optionsAdapter);
-    await createProject(optionsAdapter, options);
+  if (options.type === "interface") {
+    let optionsInterface = parseArgumentsIntoOptionsInterface(args);
+    optionsInterface = await promptForMissingOptionsInterface(optionsInterface);
+    await createProject(optionsInterface, options);
+  } else if(options.type === "adapter"){
+  let optionsAdapter = parseArgumentsIntoOptionsAdapter(args);
+  optionsAdapter = await promptForMissingOptionsAdapter(optionsAdapter);
+  await createProject(optionsAdapter, options);
   }
-  else if(options.template === "dapplet") {
+  else if(options.type === "dapplet") {
    
-    let optionsDapplet = parseArgumentsIntoOptionsDapplets(args);
-    optionsDapplet = await promptForMissingOptionsDapplets(optionsDapplet);
-    await createProject(optionsDapplet, options);
+  let optionsDapplet = parseArgumentsIntoOptionsDapplets(args);
+  optionsDapplet = await promptForMissingOptionsDapplets(optionsDapplet);
+  await createProject(optionsDapplet, options);
   }
 }

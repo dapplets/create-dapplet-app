@@ -1,6 +1,6 @@
 # Dapplet
 
-This project was bootstrapped with [Create React App](https://github.com/dapplets/create-dapplet-app)
+This project was bootstrapped with [Create Dapplet App](https://github.com/dapplets/create-dapplet-app)
 
 
 ## Getting Started

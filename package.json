@@ -1,9 +1,9 @@
 {
-  "name": "create-dapplet-app-test-0304",
-  "version": "1.0.8",
+  "name": "create-dapplet-app",
+  "version": "1.0.9",
   "main": "index.js",
   "bin": {
-    "dapplet-module-template-start": "index.js"
+    "create-dapplet": "index.js"
   },
   "scripts": {
     "interface": "node index.js"
@@ -20,5 +20,11 @@
     "listr": "^0.14.3",
     "ncp": "^2.0.0"
   },
-  "description": "creating modules"
+  "description": "creating modules",
+  "keywords": [
+    "dapplet",
+    "dapp",
+    "adapter",
+    "dapplets"
+  ]
 }

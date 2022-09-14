@@ -10,12 +10,31 @@ import {
   yesServerYesOverlay,
   optionsAdapterNotServerNotOverlay,
   createAdapter,
-  createInterface, createContext, optionsNoAdapterNotServerNotOverlay, optionsAdapterNotServerYesOverlay, optionsNoAdapterNotServerYesOverlay, optionsAdapterYesServerNotOverlay, optionsNoAdapterYesServerNotOverlay, optionsAdapterYesServerYesOverlay, optionsNoAdapterYesServerYesOverlay
+  createInterface,
+  createContext,
+  optionsNoAdapterNotServerNotOverlay,
+  optionsAdapterNotServerYesOverlay,
+  optionsNoAdapterNotServerYesOverlay,
+  optionsAdapterYesServerNotOverlay,
+  optionsNoAdapterYesServerNotOverlay,
+  optionsAdapterYesServerYesOverlay,
+  optionsNoAdapterYesServerYesOverlay,
+  addInfoAdapter,
 } from "./utils";
 
-function createModule(template, name, author, license, title, description, options) {
-  const context = options.optionsContextID ? options.optionsContextID.split(",") : null;
-  ncp(__dirname + `/${template}`, `./${name}`, function (err) {
+function createModule(
+  type,
+  name,
+  author,
+  license,
+  title,
+  description,
+  options
+) {
+  const context = options.optionsContextID
+    ? options.optionsContextID.split(" ")
+    : null;
+  ncp(__dirname + `/${type}`, `./${name}`, function (err) {
     const json1 = readFileSync(`./${name}/package.json`, "utf8");
     const object = JSON.parse(json1);
     object.name = name;
@@ -24,8 +43,17 @@ function createModule(template, name, author, license, title, description, optio
     object.description = description;
     const json2 = JSON.stringify(object);
     writeFileSync(`./${name}/package.json`, json2);
-    updateConfiguration(name, options, template);
-    updateScript(name, title, description, options, author, license, template, context);
+    updateConfiguration(name, options, type);
+    updateScript(
+      name,
+      title,
+      description,
+      options,
+      author,
+      license,
+      type,
+      context
+    );
     if (err) {
       return console.error(err);
     }
@@ -41,15 +69,24 @@ function updateConfiguration(moduleName, options, template) {
   options.optionsDappletServer && template === "dapplet"
     ? null
     : fs.rmSync(`./${moduleName}/server`, {
-      recursive: true,
-      force: true,
-    });
+        recursive: true,
+        force: true,
+      });
 
   options.optionsDappletOverlay && template === "dapplet"
     ? null
     : fs.rmSync(`./${moduleName}/overlay`, { recursive: true, force: true });
 }
-function updateScript(moduleName, title, description, options, author, license, template, context) {
+function updateScript(
+  moduleName,
+  title,
+  description,
+  options,
+  author,
+  license,
+  template,
+  context
+) {
   if (
     !options.optionsDappletServer &&
     !options.optionsDappletOverlay &&
@@ -57,22 +94,36 @@ function updateScript(moduleName, title, description, options, author, license, 
   ) {
     notOverlayNotServer(moduleName, title, description, author, license);
 
-    options.optionsDappletAdapter ? optionsAdapterNotServerNotOverlay(moduleName) : optionsNoAdapterNotServerNotOverlay(moduleName);
+    options.optionsDappletAdapter
+      ? optionsAdapterNotServerNotOverlay(moduleName)
+      : optionsNoAdapterNotServerNotOverlay(moduleName);
+    options.optionsDappletAdapter
+      ? addInfoAdapter(moduleName, license, author)
+      : null;
   } else if (
     !options.optionsDappletServer &&
     options.optionsDappletOverlay &&
     template === "dapplet"
   ) {
     notServerYesOverlay(moduleName, title, description, author, license);
-    options.optionsDappletAdapter ? optionsAdapterNotServerYesOverlay(moduleName) : optionsNoAdapterNotServerYesOverlay(moduleName)
+    options.optionsDappletAdapter
+      ? optionsAdapterNotServerYesOverlay(moduleName)
+      : optionsNoAdapterNotServerYesOverlay(moduleName);
+    options.optionsDappletAdapter
+      ? addInfoAdapter(moduleName, license, author)
+      : null;
   } else if (
     options.optionsDappletServer &&
     !options.optionsDappletOverlay &&
     template === "dapplet"
   ) {
     yesServerNotOverlay(moduleName, title, description, author, license);
-    options.optionsDappletAdapter ? optionsAdapterYesServerNotOverlay(moduleName) : optionsNoAdapterYesServerNotOverlay(moduleName)
-
+    options.optionsDappletAdapter
+      ? optionsAdapterYesServerNotOverlay(moduleName)
+      : optionsNoAdapterYesServerNotOverlay(moduleName);
+    options.optionsDappletAdapter
+      ? addInfoAdapter(moduleName, license, author)
+      : null;
   } else if (
     options.optionsDappletServer &&
     options.optionsDappletOverlay &&
@@ -80,15 +131,18 @@ function updateScript(moduleName, title, description, options, author, license, 
   ) {
     yesServerYesOverlay(moduleName, title, description, author, license);
 
-    options.optionsDappletAdapter ? optionsAdapterYesServerYesOverlay(moduleName) : optionsNoAdapterYesServerYesOverlay(moduleName);
+    options.optionsDappletAdapter
+      ? optionsAdapterYesServerYesOverlay(moduleName)
+      : optionsNoAdapterYesServerYesOverlay(moduleName);
+    options.optionsDappletAdapter
+      ? addInfoAdapter(moduleName, license, author)
+      : null;
+  } else if (template === "adapter") {
+    createAdapter(moduleName, title);
+  } else if (template === "interface") {
+    createInterface(moduleName, title);
   }
-  else if (template === "adapter") {
-    createAdapter(moduleName, title)
-  }
-  else if (template === "interface") {
-    createInterface(moduleName, title)
-  }
-  createContext(template, moduleName, context);
+  createContext(template, moduleName, context, options);
 }
 
 export async function createProject(options, packageInfo) {
@@ -96,10 +150,10 @@ export async function createProject(options, packageInfo) {
     ...options,
     targetDirectory: options.targetDirectory || process.cwd(),
   };
-  const nameProject = packageInfo.name;
+  const nameProject = options.name;
   const authorProject = packageInfo.author;
   const licenseProject = packageInfo.license.toUpperCase();
-  const titleProject = packageInfo.title;
+  const titleProject = options.title;
   const descriptionProject = packageInfo.description;
   const tasks = new Listr(
     [
@@ -107,7 +161,7 @@ export async function createProject(options, packageInfo) {
         title: "Install dependencies",
         task: () => {
           createModule(
-            options.template,
+            options.type,
             nameProject,
             authorProject,
             licenseProject,
@@ -116,7 +170,7 @@ export async function createProject(options, packageInfo) {
             options
           );
         },
-        skip: () => { },
+        skip: () => {},
       },
     ],
     {

@@ -20,7 +20,7 @@ export const scriptsMainNotServer = {
   "start:dapplet": "cd dapplet && npm start",
   "start:overlay": "cd overlay && npm start",
   "prettier": "npx prettier --write ."
-}
+};
 
 export const scriptsMainNotOverlay = {
   "postinstall": "concurrently -c \"magenta,cyan\" -n \"dapplet,server\" \"npm run install:dapplet\" \"npm run install:server\"",
@@ -30,17 +30,13 @@ export const scriptsMainNotOverlay = {
   "start:dapplet": "cd dapplet && npm start",
   "start:server": "cd server && npm start",
   "prettier": "npx prettier --write ."
-}
+};
 
 export const cacheDirectories = ["dapplet/node_modules"];
 export const cacheDirectoriesWithServer = ["dapplet/node_modules", "server/node_modules"];
 export const cacheDirectoriesWithOverlay = ["dapplet/node_modules", "overlay/node_modules"];
 
 export const overlaysDapplet = {};
-export const dependenciesDefault = {
-  "@dapplets/dapplet-extension": "^0.47.3",
-  "rollup-plugin-typescript": "^1.0.1",
-};
 
 export const configSchemaNotServer = {
   "exampleString": {
@@ -52,18 +48,13 @@ export const configSchemaNotServer = {
     "title": "Example of hidden string property",
     "hidden": true
   }
-}
+};
 
 export const configDefaultNotServer = {
   "exampleString": "some string value",
   "exampleHiddenString": "some string value"
-}
+};
 
-export const dependenciesNotOverlay = {
-  "@dapplets/dapplet-extension": "^0.47.3",
-  "@types/classnames": "^2.3.1",
-  "rollup-plugin-typescript": "^1.0.1",
-}
 
 export const scriptAdapterNotServerNotOverlay = {
   "postinstall": "concurrently -c \"magenta,cyan\" -n \"dapplet,adapter\" \"npm run install:dapplet\" \"npm run install:adapter\"",
@@ -73,7 +64,7 @@ export const scriptAdapterNotServerNotOverlay = {
   "start:dapplet": "cd dapplet && npm start",
   "start:adapter": "cd adapter && npm start",
   "prettier": "npx prettier --write ."
-}
+};
 
 export const cacheDirectoriesAdapterNotServerNotOverlay = ["dapplet/node_modules", "adapter/node_modules"];
 
@@ -87,7 +78,7 @@ export const scriptAdapterNotServerYesOverlay = {
   "start:adapter": "cd adapter && npm start",
   "start:overlay": "cd overlay && npm start",
   "prettier": "npx prettier --write ."
-}
+};
 
 export const cacheDirectoriesAdapterNotServerYesOverlay = ["dapplet/node_modules", "adapter/node_modules", "overlay/node_modules"];
 
@@ -101,7 +92,7 @@ export const scriptAdapterYesServerNoOverlay = {
   "start:adapter": "cd adapter && npm start",
   "start:server": "cd overlay && npm start",
   "prettier": "npx prettier --write ."
-}
+};
 
 export const cacheDirectoriesAdapterYesServerNoOverlay = ["dapplet/node_modules", "adapter/node_modules", "server/node_modules"];
 
@@ -134,7 +125,7 @@ export const scriptNoAdapterYesServerYesOverlay = {
   "start:overlay": "cd overlay && npm start",
   "start:server": "cd server && npm start",
   "prettier": "npx prettier --write ."
-}
+};
 
 export const cacheDirectoriesNoAdapterYesServerYesOverlay = ["dapplet/node_modules",
   "overlay/node_modules",
