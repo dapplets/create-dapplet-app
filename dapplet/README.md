@@ -11,38 +11,8 @@ This project was bootstrapped with [Create React App](https://github.com/dapplet
 
 ### Option "adapter"
 
-
-If you have selected the additional option **adapter**, open an additional terminal. 
-
-1.   Go to adapter folder and `npm i` for loading dependences.
-2.   `npm start` to run adapter in localhost.
-
-Open the file './dapplet/src/intex.ts. Uncomment the lines.
-
-   ```js
-    ...
-    @Injectable
-    export default class Adapter {
-
-    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
-    @Inject('template-adapter') public adapter: any;
-    }
-    ...
-```
-
- To use adapter comment out or remove default adapter usage.
-
-```js
-    ...
-   @Injectable
-    export default class TwitterFeature {
-
-    ...
-
-    }
-    ...
-```
-
+More about using the [adapter](https://docs.dapplets.org/docs/new-site-adapter).
+More about using the Web Components for adapter [here](https://docs.dapplets.org/docs/web-components).
 
 ### Option "overlay"
 

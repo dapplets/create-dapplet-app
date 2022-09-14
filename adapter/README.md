@@ -14,6 +14,9 @@ This project was bootstrapped with [Create React App](https://github.com/dapplet
 
 1.  `npm build` - building the module.
 
+More about using the [adapter](https://docs.dapplets.org/docs/new-site-adapter).
+More about using the Web Components for adapter [here](https://docs.dapplets.org/docs/web-components).
+
 ## Learn more
 
 * **Dapplets Project** - [dapplets site](https://dapplets.org/)
