@@ -1,7 +1,6 @@
-
 # Adapter
 
-This project was bootstrapped with [Create React App](https://github.com/dapplets/create-dapplet-app)
+This project was bootstrapped with [Create Dapplet App](https://github.com/dapplets/create-dapplet-app)
 
 
 ## Getting Started
@@ -13,6 +12,9 @@ This project was bootstrapped with [Create React App](https://github.com/dapplet
 ### Building
 
 1.  `npm build` - building the module.
+
+More about using the [adapter](https://docs.dapplets.org/docs/new-site-adapter).
+More about using the Web Components for adapter [here](https://docs.dapplets.org/docs/web-components).
 
 ## Learn more
 

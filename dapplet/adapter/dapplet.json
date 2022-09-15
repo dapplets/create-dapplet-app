@@ -3,11 +3,11 @@
   "branch": "default",
   "version": { "$ref": "package.json#/version" },
   "type": "ADAPTER",
-  "title": { "$ref": "package.json#/name" },
+  "title": "",
   "description": { "$ref": "package.json#/description" },
   "main": { "$ref": "package.json#/main" },
   "contextIds": [],
   "dependencies": {
-    "dynamic-adapter.dapplet-base.eth": "0.6.13"
+    "dynamic-adapter.dapplet-base.eth": "0.6.22"
   }
 }
