@@ -1,10 +1,10 @@
-import { IBridge, } from './types';
+import { IBridge } from './types';
 
 export class Api implements IBridge {
 
   private state: any;
 
-  constructor(config: {  state: any }) {
+  constructor(config: { state: any }) {
     this.state = config.state;
   }
 

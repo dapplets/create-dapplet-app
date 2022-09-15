@@ -98,7 +98,7 @@ function updateScript(
       ? optionsAdapterNotServerNotOverlay(moduleName)
       : optionsNoAdapterNotServerNotOverlay(moduleName);
     options.optionsDappletAdapter
-      ? addInfoAdapter(moduleName, license, author)
+      ? addInfoAdapter(moduleName, license, author,options.nameAdapter)
       : null;
   } else if (
     !options.optionsDappletServer &&
@@ -110,7 +110,7 @@ function updateScript(
       ? optionsAdapterNotServerYesOverlay(moduleName)
       : optionsNoAdapterNotServerYesOverlay(moduleName);
     options.optionsDappletAdapter
-      ? addInfoAdapter(moduleName, license, author)
+      ? addInfoAdapter(moduleName, license, author,options.nameAdapter)
       : null;
   } else if (
     options.optionsDappletServer &&
@@ -122,7 +122,7 @@ function updateScript(
       ? optionsAdapterYesServerNotOverlay(moduleName)
       : optionsNoAdapterYesServerNotOverlay(moduleName);
     options.optionsDappletAdapter
-      ? addInfoAdapter(moduleName, license, author)
+      ? addInfoAdapter(moduleName, license, author,options.nameAdapter)
       : null;
   } else if (
     options.optionsDappletServer &&
@@ -135,7 +135,7 @@ function updateScript(
       ? optionsAdapterYesServerYesOverlay(moduleName)
       : optionsNoAdapterYesServerYesOverlay(moduleName);
     options.optionsDappletAdapter
-      ? addInfoAdapter(moduleName, license, author)
+      ? addInfoAdapter(moduleName, license, author,options.nameAdapter)
       : null;
   } else if (template === "adapter") {
     createAdapter(moduleName, title);

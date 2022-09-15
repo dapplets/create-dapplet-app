@@ -338,6 +338,58 @@ async function promptForMissingOptionsInterface(options) {
   };
 }
 
+function parseArgumentsIntoOptionsDappletAdapter(rawArgs) {
+  const args = arg(
+    {
+      "--choice": Boolean,
+      "--yes": Boolean,
+      "--install": Boolean,
+      "-g": "--choice",
+      "-y": "--yes",
+      "-i": "--install",
+    },
+    {
+      argv: rawArgs.slice(2),
+    }
+  );
+  return {
+    skipPrompts: args["--yes"] || false,
+    nameAdapter: args._[0],
+  };
+}
+
+async function promptForMissingOptionsDappletAdapter(options,name,author) {
+  const parseName = name.toString().replace(' ','-').toLowerCase() 
+  const parseAuthor = author ? author.toString().replace(' ','-').toLowerCase() : null
+  const finalName =`.${parseAuthor}`
+  const defaultNameAdapter = `${parseName}-adapter${parseAuthor? finalName : ''}`;
+ 
+  if (options.skipPrompts) {
+    return {
+      ...options,
+      nameAdapter: options.nameAdapter || defaultNameAdapter,
+    };
+  }
+
+  const questions = [];
+
+  if (!options.nameAdapter) {
+    questions.push({
+      type: "string",
+      name: "nameAdapter",
+      message: "Please enter name adapter",
+      default: defaultNameAdapter,
+    });
+  }
+
+  const answers = await inquirer.prompt(questions);
+
+  return {
+    ...options,
+    nameAdapter: options.nameAdapter || answers.nameAdapter,
+  };
+}
+
 export async function cli(args) {
   let options = parseArgumentsIntoOptions(args);
   options = await promptForMissingOptions(options);
@@ -354,6 +406,14 @@ export async function cli(args) {
    
   let optionsDapplet = parseArgumentsIntoOptionsDapplets(args);
   optionsDapplet = await promptForMissingOptionsDapplets(optionsDapplet);
-  await createProject(optionsDapplet, options);
+  if(optionsDapplet.optionsDappletAdapter){
+    let optionsAdapter = parseArgumentsIntoOptionsDappletAdapter(args);
+    optionsAdapter = await promptForMissingOptionsDappletAdapter(optionsAdapter,optionsDapplet.name,options.author)
+    const newOptions = {...optionsDapplet,...optionsAdapter}
+    await createProject(newOptions, options)
+  } else{
+    await createProject(optionsDapplet, options);
+  }
+  
   }
 }

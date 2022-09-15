@@ -1,5 +1,5 @@
 import { IFeature } from '@dapplets/dapplet-extension';
-import { WbButton, IWbButtonProps } from './wb-button';
+import { Button, IButtonProps } from './button';
 
 type ContextBuilder = {
   [propName: string]: string;
@@ -12,7 +12,7 @@ type Exports = {
 @Injectable
 export default class Adapter {
   public exports = (): Exports => ({
-    button: this.adapter.createWidgetFactory(WbButton),
+    button: this.adapter.createWidgetFactory(Button),
   });
 
   
@@ -22,28 +22,6 @@ export default class Adapter {
       contextSelector: '',
       insPoints: {
         POST: {
-          selector: '',
-          insert: '',
-        },
-      },
-      contextBuilder: (): ContextBuilder => ({}),
-    },
-    QUOTE_POST: {
-      containerSelector: '',
-      contextSelector: '',
-      insPoints: {
-        QUOTE_POST: {
-          selector: '',
-          insert: '',
-        },
-      },
-      contextBuilder: (): ContextBuilder => ({}),
-    },
-    PROFILE: {
-      containerSelector: '',
-      contextSelector: '',
-      insPoints: {
-        PROFILE: {
           selector: '',
           insert: '',
         },

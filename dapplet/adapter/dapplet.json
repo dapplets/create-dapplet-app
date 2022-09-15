@@ -3,7 +3,7 @@
   "branch": "default",
   "version": { "$ref": "package.json#/version" },
   "type": "ADAPTER",
-  "title": "adapter",
+  "title": { "$ref": "package.json#/name" },
   "description": { "$ref": "package.json#/description" },
   "main": { "$ref": "package.json#/main" },
   "contextIds": [],

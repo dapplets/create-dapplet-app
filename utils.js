@@ -257,7 +257,7 @@ export function createContext(template, moduleName, context, options) {
         "utf8"
       );
       const objectDapplet = JSON.parse(jsonDapplet);
-      objectDapplet.contextIds = context ? ["adapter"] : [];
+      objectDapplet.contextIds =  [`${options.nameAdapter}`]
       const json2Dapplet = JSON.stringify(objectDapplet);
       writeFileSync(`./${moduleName}/dapplet/dapplet.json`, json2Dapplet);
 
@@ -345,11 +345,12 @@ export function optionsNoAdapterYesServerYesOverlay(moduleName) {
   writeFileSync(`./${moduleName}/package.json`, json2);
 }
 
-export function addInfoAdapter(moduleName, license, author){
+export function addInfoAdapter(moduleName, license, author,nameAdapter){
   const jsonAdapter = readFileSync(`./${moduleName}/adapter/package.json`, "utf8");
   const objectAdapter = JSON.parse(jsonAdapter);
   objectAdapter.author = author;
   objectAdapter.license = license;
+  objectAdapter.name = nameAdapter
   const jsonAdapter2 = JSON.stringify(objectAdapter);
   writeFileSync(`./${moduleName}/adapter/package.json`, jsonAdapter2);
 }

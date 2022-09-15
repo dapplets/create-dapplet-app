@@ -6,8 +6,6 @@ import { } from '@dapplets/dapplet-extension';
 // import { Api } from './api';
 // import { IBridge, IStorage } from './types';
 
-
-
 @Injectable
 
 /** 
@@ -40,12 +38,6 @@ export default class {
   async activate(): Promise<void> {
 
     /**
-    * Uncomment this to use server
-    */
-    // const server = Core.connect<IStorage>
-
-
-    /**
      * Uncomment this to use overlay
      */
     //  await this.api.initializeCurrentAccount();
@@ -53,7 +45,6 @@ export default class {
     //    this.overlay.open()
     //    this.api.initializeCurrentAccount();
     //  });
-
 
   }
 }

@@ -13,7 +13,6 @@ or
 ```bash
 
 npx create-dapplet-app
-create-dapplet
 
 ```
 
@@ -27,6 +26,7 @@ create-dapplet
 1. **name** -  the name of the module. The name is the ID of your module so it must be unique.
 2. **title** - a module's name. It's displayed in the extension's dapplets list, in the Dapplets Store, on the NFT, etc.
 3. **adapter** - create a site-specific adapter for the dapplet
+    3.1. **adapter's name** - the name of the site-specific adapter for the dapplet.
 4. **server** - create a server for the dapplet
 5. **overlay** - create an overlay for the dapplet
 6. **ContextID** -  a list of resources where the module is loaded and activated. You should list site domains or a name of the module (adapter, interface), where domains are already listed.

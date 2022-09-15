@@ -16,27 +16,13 @@ More about using the Web Components for adapter [here](https://docs.dapplets.org
 
 ### Option "overlay"
 
-If you have selected the additional option **overlay**, open the file './dapplet/src/intex.ts. Uncomment the lines.
+More about using the [overlay](https://docs.dapplets.org/docs/overlay-login).
 
-  ```js
-...
-// ! overlay
-...
-//  ! overlay
-...
- ```
 
  ### Option "server"
 
-If you have selected the additional option **server**, open the file './dapplet/src/intex.ts. Uncomment the lines.
+More about using the [server](https://docs.dapplets.org/docs/server-connection)
 
-  ```js
-...
-// ! server
-...
-//  ! server
-...
- ```
 
 ## Learn more
 
