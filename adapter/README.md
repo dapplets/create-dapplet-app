@@ -1,4 +1,3 @@
-
 # Adapter
 
 This project was bootstrapped with [Create Dapplet App](https://github.com/dapplets/create-dapplet-app)

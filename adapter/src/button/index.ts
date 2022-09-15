@@ -2,11 +2,11 @@ import { LitElement, html } from "lit";
 import { property } from "lit/decorators.js";
 import { styleMap } from "lit/directives/style-map.js";
 import { classMap } from "lit/directives/class-map.js";
-import { styles } from "./wb-button.css";
+import { styles } from "./button.css";
 import { loader } from "./loader.html";
 import { description } from "./description";
 
-export interface IWbButtonProps {
+export interface IButtonProps {
     ctx: any;
     theme?: "DARK" | "LIGHT";
     insPointName?: string;
@@ -22,7 +22,7 @@ export interface IWbButtonProps {
     init: (ctx: any, me: this) => void;
 }
 
-export class WbButton extends LitElement implements IWbButtonProps {
+export class Button extends LitElement implements IButtonProps {
     public static override styles = styles;
     public static widgetParamsDescription = description;
     public static contextInsPoints = {

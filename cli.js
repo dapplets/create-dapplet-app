@@ -115,13 +115,14 @@ function parseArgumentsIntoOptionsDapplets(rawArgs) {
 
 async function promptForMissingOptionsDapplets(options) {
   const defaultType = "dapplet";
-  const defaultName = "dapplet-module";
+  const defaultName = "my-dapplet";
+  const defaultTitle = 'My Dapplet';
   if (options.skipPrompts) {
     return {
       ...options,
       type: options.type || defaultType,
       name: options.name || defaultName,
-      title: options.title || defaultName,
+      title: options.title || defaultTitle,
       description: options.optionsDappletDescription || "",
       context: options.optionsContextID || null,
     };
@@ -143,7 +144,7 @@ async function promptForMissingOptionsDapplets(options) {
       type: "string",
       name: "title",
       message: "Please enter title module (display name in extension)",
-      default: defaultName,
+      default: defaultTitle,
     });
   }
 
@@ -221,12 +222,13 @@ function parseArgumentsIntoOptionsAdapter(rawArgs) {
 async function promptForMissingOptionsAdapter(options) {
   const defaultType = "adapter";
   const defaultName = "my-adapter";
+  const defaultTitle = 'My Adapter'
   if (options.skipPrompts) {
     return {
       ...options,
       type: options.type || defaultType,
       name: options.name || defaultName,
-      title: options.title || defaultName,
+      title: options.title || defaultTitle,
       context: options.optionsContextID || null,
     };
   }
@@ -247,7 +249,7 @@ async function promptForMissingOptionsAdapter(options) {
       type: "string",
       name: "title",
       message: "Please enter title module (display name in extension)",
-      default: defaultName,
+      default: defaultTitle,
     });
   }
 
@@ -295,12 +297,13 @@ function parseArgumentsIntoOptionsInterface(rawArgs) {
 async function promptForMissingOptionsInterface(options) {
   const defaultType = "interface";
   const defaultName = "my-virtual-adapter";
+  const defaultTitle = 'My Virtual Adapter'
   if (options.skipPrompts) {
     return {
       ...options,
       type: options.type || defaultType,
       name: options.name || defaultName,
-      title: options.title || defaultName,
+      title: options.title || defaultTitle,
     };
   }
 
@@ -320,7 +323,7 @@ async function promptForMissingOptionsInterface(options) {
       type: "string",
       name: "title",
       message: "Please enter title module (display name in extension)",
-      default: defaultName,
+      default: defaultTitle,
     });
   }
   

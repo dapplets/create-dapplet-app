@@ -1,11 +1,11 @@
 import { } from '@dapplets/dapplet-extension';
 
-// ! overlay
-/** 
-import { Api } from './api';
-import { IBridge, IStorage } from './types';
-*/
-// ! overlay
+/**
+ * Uncomment this to use overlay
+ */
+// import { Api } from './api';
+// import { IBridge, IStorage } from './types';
+
 
 
 @Injectable
@@ -23,40 +23,38 @@ export default class {
   @Inject('')
   public adapter: any;
 
-  // ! overlay
-  /** Uncomment this to use overlay
-     private state = Core.state<IStorage>({
-    userAccount: '',
-  });
-     private api = new Api({
-     state: this.state
-   });
-   */
-  // ! overlay
-
-  // ! overlay
-  /** Uncomment this to use overlay
-      private overlay = Core.overlay<IBridge>({ name: 'overlay', title: '' })
-     .useState(this.state)
-     .declare(this.api);
+  /**
+    * Uncomment this to use overlay
     */
-  // ! overlay
+  // private state = Core.state<IStorage>({
+  //   userAccount: '',
+  // });
+  // private api = new Api({
+  //   state: this.state
+  // });
 
+  // private overlay = Core.overlay<IBridge>({ name: 'overlay', title: '' })
+  //   .useState(this.state)
+  //   .declare(this.api);
 
   async activate(): Promise<void> {
-    // ! server
-    // const server = Core.connect<IStorage>
-    // ! server
 
-    // ! overlay
-    /** Uncomment this to use overlay
-    await this.api.initializeCurrentAccount();
-   Core.onAction(() => {
-     this.overlay.open()
-     this.api.initializeCurrentAccount();
-   });
-  */
-    // ! overlay
+    /**
+    * Uncomment this to use server
+    */
+    // const server = Core.connect<IStorage>
+
+
+    /**
+     * Uncomment this to use overlay
+     */
+    //  await this.api.initializeCurrentAccount();
+    //  Core.onAction(() => {
+    //    this.overlay.open()
+    //    this.api.initializeCurrentAccount();
+    //  });
+
+
   }
 }
 
