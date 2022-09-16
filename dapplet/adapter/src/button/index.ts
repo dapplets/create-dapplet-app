@@ -10,7 +10,6 @@ export interface IButtonProps {
     ctx: any;
     insPointName?: string;
     img: string;
-    basic?: boolean;
     label: string;
     tooltip?: string;
     disabled: boolean;
@@ -23,9 +22,7 @@ export class Button extends LitElement implements IButtonProps {
     public static override styles = styles;
     public static widgetParamsDescription = description;
     public static contextInsPoints = {
-        POST: "SOUTH",
-        QUOTE_POST: "SOUTH",
-        PROFILE: "BUTTON_GROUP",
+        POST: "POST",
     };
 
     @property() state;
@@ -33,7 +30,6 @@ export class Button extends LitElement implements IButtonProps {
     @property() img;
     @property() label;
     @property() tooltip;
-    @property() loading = false;
     @property() disabled = false;
     @property() hidden = false;
     @property() exec: (ctx: any, me: this) => void;
@@ -60,10 +56,10 @@ export class Button extends LitElement implements IButtonProps {
                 ${this.img
                     ? html`<img
                           style=${styleMap({
-                              width: this.basic ? "36px" : "18px",
-                              height: this.basic ? "36px" : "18px",
+                              width:  "18px",
+                              height:  "18px",
                               position: "relative",
-                              top: this.basic ? undefined : "3px",
+                              top: "3px",
                               marginRight: this.label ? "6px" : undefined,
                           })}
                           src="${this.img}"

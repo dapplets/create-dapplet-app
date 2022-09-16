@@ -4,14 +4,6 @@
 
 ```bash
 
-npm i create-dapplet-app -g
-create-dapplet
-
-```
-or 
-
-```bash
-
 npx create-dapplet-app
 
 ```

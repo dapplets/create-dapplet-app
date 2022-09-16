@@ -1,6 +1,6 @@
 {
   "name": "create-dapplet-app",
-  "version": "1.0.12",
+  "version": "1.0.15",
   "main": "index.js",
   "bin": {
     "create-dapplet": "index.js"
