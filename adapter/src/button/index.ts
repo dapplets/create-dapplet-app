@@ -1,9 +1,7 @@
 import { LitElement, html } from "lit";
 import { property } from "lit/decorators.js";
 import { styleMap } from "lit/directives/style-map.js";
-import { classMap } from "lit/directives/class-map.js";
 import { styles } from "./button.css";
-import { loader } from "./loader.html";
 import { description } from "./description";
 
 export interface IButtonProps {
