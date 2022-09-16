@@ -34,6 +34,8 @@ function createModule(
   const context = options.optionsContextID
     ? options.optionsContextID.split(" ")
     : null;
+  // const contextDefault = context.push("twitter-adapter.dapplet-base.eth");
+  // console.log(contextDefault);
   ncp(__dirname + `/${type}`, `./${name}`, function (err) {
     const json1 = readFileSync(`./${name}/package.json`, "utf8");
     const object = JSON.parse(json1);

@@ -248,7 +248,9 @@ export function createContext(template, moduleName, context, options) {
         "utf8"
       );
       const objectDapplet = JSON.parse(jsonDapplet);
-      objectDapplet.contextIds = context ? context : [];
+      const newContext = context.push("twitter-adapter.dapplet-base.eth")
+      console.log(newContext);
+      objectDapplet.contextIds = context ? context : ["twitter-adapter.dapplet-base.eth"];
       const json2Dapplet = JSON.stringify(objectDapplet);
       writeFileSync(`./${moduleName}/dapplet/dapplet.json`, json2Dapplet);
     } else {
@@ -257,7 +259,7 @@ export function createContext(template, moduleName, context, options) {
         "utf8"
       );
       const objectDapplet = JSON.parse(jsonDapplet);
-      objectDapplet.contextIds =  [`${options.nameAdapter}`]
+      objectDapplet.contextIds =  ["twitter-adapter.dapplet-base.eth",`${options.nameAdapter}`]
       const json2Dapplet = JSON.stringify(objectDapplet);
       writeFileSync(`./${moduleName}/dapplet/dapplet.json`, json2Dapplet);
 
