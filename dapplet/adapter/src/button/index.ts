@@ -49,7 +49,7 @@ export class Button extends LitElement implements IButtonProps {
             return html`<div
                 @click=${this._clickHandler}
                 title=${this.tooltip}
-                class="dapplet-widget-profile-button"
+                class="dapplet-button"
             >
                 ${this.img
                     ? html`<img

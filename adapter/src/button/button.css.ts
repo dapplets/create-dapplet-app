@@ -1,7 +1,7 @@
 import { css } from "lit";
 
 export const styles = css`
-    .dapplet-widget-button {
+    .dapplet-button {
         height: 35px;
         padding: 0 10px;
         user-select: none;
@@ -10,7 +10,7 @@ export const styles = css`
         font-size: 15px;
         cursor: pointer;
     }
-    .dapplet-widget-button:hover {
+    .dapplet-button:hover {
         background-color: rgba(15, 20, 25, 0.1);
     }
 `;
