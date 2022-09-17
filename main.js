@@ -22,6 +22,8 @@ import {
   addInfoAdapter,
 } from "./utils";
 
+let counter = 0 
+
 function createModule(
   type,
   name,
@@ -34,8 +36,6 @@ function createModule(
   const context = options.optionsContextID
     ? options.optionsContextID.split(" ")
     : null;
-  // const contextDefault = context.push("twitter-adapter.dapplet-base.eth");
-  // console.log(contextDefault);
   ncp(__dirname + `/${type}`, `./${name}`, function (err) {
     const json1 = readFileSync(`./${name}/package.json`, "utf8");
     const object = JSON.parse(json1);
@@ -152,7 +152,7 @@ export async function createProject(options, packageInfo) {
     ...options,
     targetDirectory: options.targetDirectory || process.cwd(),
   };
-  const nameProject = options.name;
+  let nameProject = options.name;
   const authorProject = packageInfo.author;
   const licenseProject = packageInfo.license.toUpperCase();
   const titleProject = options.title;
@@ -162,15 +162,26 @@ export async function createProject(options, packageInfo) {
       {
         title: "Install dependencies",
         task: () => {
-          createModule(
-            options.type,
-            nameProject,
-            authorProject,
-            licenseProject,
-            titleProject,
-            descriptionProject,
-            options
-          );
+          function checkNameFolder() {
+            fs.stat(`./${nameProject}`, function (err) {
+              if (!err) {
+                nameProject = nameProject+ '-' + counter++;
+                return checkNameFolder();
+              } else if (err.code === "ENOENT") {
+                createModule(
+                  options.type,
+                  nameProject,
+                  authorProject,
+                  licenseProject,
+                  titleProject,
+                  descriptionProject,
+                  options
+                );
+              }
+            });
+          }
+          checkNameFolder()
+         
         },
         skip: () => {},
       },

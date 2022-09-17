@@ -248,8 +248,7 @@ export function createContext(template, moduleName, context, options) {
         "utf8"
       );
       const objectDapplet = JSON.parse(jsonDapplet);
-      const newContext = context.push("twitter-adapter.dapplet-base.eth")
-      console.log(newContext);
+    context && context.push("twitter-adapter.dapplet-base.eth")
       objectDapplet.contextIds = context ? context : ["twitter-adapter.dapplet-base.eth"];
       const json2Dapplet = JSON.stringify(objectDapplet);
       writeFileSync(`./${moduleName}/dapplet/dapplet.json`, json2Dapplet);

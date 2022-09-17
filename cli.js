@@ -1,6 +1,42 @@
 import arg from "arg";
 import inquirer from "inquirer";
 import { createProject } from "./main";
+import fs from "fs";
+let defaultNameDapplet = "my-dapplet";
+let defaultNameAdapter = "my-adapter";
+let defaultNameInterface = "my-virtual-adapter";
+let counter = 0;
+
+function checkNameFolderDapplet() {
+  fs.stat(`./${defaultNameDapplet}`, function (err) {
+    if (!err) {
+      defaultNameDapplet = defaultNameDapplet+ '-' + counter++;
+      return checkNameFolderDapplet();
+    } else if (err.code === "ENOENT") {
+    }
+  });
+}
+
+function checkNameFolderAdapter() {
+  fs.stat(`./${defaultNameAdapter}`, function (err) {
+    if (!err) {
+      defaultNameAdapter = defaultNameAdapter+ '-' + counter++;
+      return checkNameFolderAdapter();
+    } else if (err.code === "ENOENT") {
+    }
+  })
+}
+
+  function checkNameFolderInterface() {
+    fs.stat(`./${defaultNameInterface}`, function (err) {
+      if (!err) {
+        defaultNameInterface = defaultNameInterface+ '-' + counter++;
+        return checkNameFolderInterface();
+      } else if (err.code === "ENOENT") {
+      }
+    });
+  }
+
 
 function parseArgumentsIntoOptions(rawArgs) {
   const args = arg(
@@ -34,7 +70,7 @@ async function promptForMissingOptions(options) {
       type: options.type || defaultType,
       author: options.author || "",
       license: options.license || "",
-      description : options.description || ''
+      description: options.description || "",
     };
   }
 
@@ -76,14 +112,16 @@ async function promptForMissingOptions(options) {
     });
   }
 
-
+  checkNameFolderDapplet();
+  checkNameFolderAdapter();
+  checkNameFolderInterface();
   const answers = await inquirer.prompt(questions);
   return {
     ...options,
     type: options.type || answers.type,
     author: options.author || answers.author,
-    license: options.license || answers.license, 
-    description: options.description  || answers.description
+    license: options.license || answers.license,
+    description: options.description || answers.description,
   };
 }
 
@@ -115,13 +153,12 @@ function parseArgumentsIntoOptionsDapplets(rawArgs) {
 
 async function promptForMissingOptionsDapplets(options) {
   const defaultType = "dapplet";
-  const defaultName = "my-dapplet";
-  const defaultTitle = 'My Dapplet';
+  const defaultTitle = "My Dapplet";
   if (options.skipPrompts) {
     return {
       ...options,
       type: options.type || defaultType,
-      name: options.name || defaultName,
+      name: options.name || defaultNameDapplet,
       title: options.title || defaultTitle,
       description: options.optionsDappletDescription || "",
       context: options.optionsContextID || null,
@@ -135,7 +172,7 @@ async function promptForMissingOptionsDapplets(options) {
       type: "string",
       name: "name",
       message: "Please enter name project",
-      default: defaultName,
+      default: defaultNameDapplet,
     });
   }
 
@@ -220,14 +257,13 @@ function parseArgumentsIntoOptionsAdapter(rawArgs) {
 }
 
 async function promptForMissingOptionsAdapter(options) {
-  const defaultType = "adapter";
-  const defaultName = "my-adapter";
-  const defaultTitle = 'My Adapter'
+  const defaultType = "adapter";;
+  const defaultTitle = "My Adapter";
   if (options.skipPrompts) {
     return {
       ...options,
       type: options.type || defaultType,
-      name: options.name || defaultName,
+      name: options.name || defaultNameAdapter,
       title: options.title || defaultTitle,
       context: options.optionsContextID || null,
     };
@@ -240,7 +276,7 @@ async function promptForMissingOptionsAdapter(options) {
       type: "string",
       name: "name",
       message: "Please enter name project",
-      default: defaultName,
+      default: defaultNameAdapter,
     });
   }
 
@@ -296,13 +332,12 @@ function parseArgumentsIntoOptionsInterface(rawArgs) {
 
 async function promptForMissingOptionsInterface(options) {
   const defaultType = "interface";
-  const defaultName = "my-virtual-adapter";
-  const defaultTitle = 'My Virtual Adapter'
+  const defaultTitle = "My Virtual Adapter";
   if (options.skipPrompts) {
     return {
       ...options,
       type: options.type || defaultType,
-      name: options.name || defaultName,
+      name: options.name || defaultNameInterface,
       title: options.title || defaultTitle,
     };
   }
@@ -314,7 +349,7 @@ async function promptForMissingOptionsInterface(options) {
       type: "string",
       name: "name",
       message: "Please enter name project",
-      default: defaultName,
+      default: defaultNameInterface,
     });
   }
 
@@ -326,7 +361,6 @@ async function promptForMissingOptionsInterface(options) {
       default: defaultTitle,
     });
   }
-  
 
   const answers = await inquirer.prompt(questions);
 
@@ -358,12 +392,16 @@ function parseArgumentsIntoOptionsDappletAdapter(rawArgs) {
   };
 }
 
-async function promptForMissingOptionsDappletAdapter(options,name,author) {
-  const parseName = name.toString().replace(' ','-').toLowerCase() 
-  const parseAuthor = author ? author.toString().replace(' ','-').toLowerCase() : null
-  const finalName =`.${parseAuthor}`
-  const defaultNameAdapter = `${parseName}-adapter${parseAuthor? finalName : ''}`;
- 
+async function promptForMissingOptionsDappletAdapter(options, name, author) {
+  const parseName = name.toString().replace(" ", "-").toLowerCase();
+  const parseAuthor = author
+    ? author.toString().replace(" ", "-").toLowerCase()
+    : null;
+  const finalName = `.${parseAuthor}`;
+  const defaultNameAdapter = `${parseName}-adapter${
+    parseAuthor ? finalName : ""
+  }`;
+
   if (options.skipPrompts) {
     return {
       ...options,
@@ -397,23 +435,24 @@ export async function cli(args) {
     let optionsInterface = parseArgumentsIntoOptionsInterface(args);
     optionsInterface = await promptForMissingOptionsInterface(optionsInterface);
     await createProject(optionsInterface, options);
-  } else if(options.type === "adapter"){
-  let optionsAdapter = parseArgumentsIntoOptionsAdapter(args);
-  optionsAdapter = await promptForMissingOptionsAdapter(optionsAdapter);
-  await createProject(optionsAdapter, options);
-  }
-  else if(options.type === "dapplet") {
-   
-  let optionsDapplet = parseArgumentsIntoOptionsDapplets(args);
-  optionsDapplet = await promptForMissingOptionsDapplets(optionsDapplet);
-  if(optionsDapplet.optionsDappletAdapter){
-    let optionsAdapter = parseArgumentsIntoOptionsDappletAdapter(args);
-    optionsAdapter = await promptForMissingOptionsDappletAdapter(optionsAdapter,optionsDapplet.name,options.author)
-    const newOptions = {...optionsDapplet,...optionsAdapter}
-    await createProject(newOptions, options)
-  } else{
-    await createProject(optionsDapplet, options);
-  }
-  
+  } else if (options.type === "adapter") {
+    let optionsAdapter = parseArgumentsIntoOptionsAdapter(args);
+    optionsAdapter = await promptForMissingOptionsAdapter(optionsAdapter);
+    await createProject(optionsAdapter, options);
+  } else if (options.type === "dapplet") {
+    let optionsDapplet = parseArgumentsIntoOptionsDapplets(args);
+    optionsDapplet = await promptForMissingOptionsDapplets(optionsDapplet);
+    if (optionsDapplet.optionsDappletAdapter) {
+      let optionsAdapter = parseArgumentsIntoOptionsDappletAdapter(args);
+      optionsAdapter = await promptForMissingOptionsDappletAdapter(
+        optionsAdapter,
+        optionsDapplet.name,
+        options.author
+      );
+      const newOptions = { ...optionsDapplet, ...optionsAdapter };
+      await createProject(newOptions, options);
+    } else {
+      await createProject(optionsDapplet, options);
+    }
   }
 }
