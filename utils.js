@@ -259,6 +259,9 @@ export function createContext(template, moduleName, context, options) {
       );
       const objectDapplet = JSON.parse(jsonDapplet);
       objectDapplet.contextIds =  ["twitter-adapter.dapplet-base.eth",`${options.nameAdapter}`]
+      const newDependencies = {"twitter-adapter.dapplet-base.eth":"0.9.0"}
+      newDependencies[options.nameAdapter] = '0.1.0'
+      objectDapplet.dependencies = newDependencies
       const json2Dapplet = JSON.stringify(objectDapplet);
       writeFileSync(`./${moduleName}/dapplet/dapplet.json`, json2Dapplet);
 

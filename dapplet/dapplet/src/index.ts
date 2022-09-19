@@ -47,7 +47,10 @@ export default class Dapplet {
           initial: 'DEFAULT',
           DEFAULT: {
             img: EXAMPLE_IMG,
+            label:'my button',
             exec: async (_, me) => {
+              console.log('ctx', ctx);
+              console.log('me', me);
             },
           },
         }),

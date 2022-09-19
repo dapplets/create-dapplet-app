@@ -5,7 +5,7 @@ export const scriptsDefault = {
 };
 
 export const scriptsMain = {
-  "postinstall": "concurrently -c \"dapplet\" \"npm run install:dapplet\"",
+  "postinstall": "npm run install:dapplet",
   "install:dapplet": "cd dapplet && npm i",
   "start": "cd dapplet && npm start",
   "start:dapplet": "cd dapplet && npm start",
@@ -69,11 +69,11 @@ export const scriptAdapterNotServerNotOverlay = {
 export const cacheDirectoriesAdapterNotServerNotOverlay = ["dapplet/node_modules", "adapter/node_modules"];
 
 export const scriptAdapterNotServerYesOverlay = {
-  "postinstall": "concurrently -c \"magenta,cyan\" -n \"dapplet,adapter,overlay\" \"npm run install:dapplet\" \"npm run install:overlay\" \"npm run install:adapter\"",
+  "postinstall": "concurrently -c \"magenta,cyan,yellow\" -n \"dapplet,adapter,overlay\" \"npm run install:dapplet\" \"npm run install:overlay\" \"npm run install:adapter\"",
   "install:dapplet": "cd dapplet && npm i",
   "install:overlay": "cd overlay && npm i",
   "install:adapter": "cd adapter && npm i",
-  "start": "concurrently -c \"magenta,cyan\" -n \"dapplet,overlay,adapter\" \"npm run start:dapplet\" \"npm run start:overlay\" \"npm run start:adapter\"",
+  "start": "concurrently -c \"magenta,cyan,yellow\" -n \"dapplet,overlay,adapter\" \"npm run start:dapplet\" \"npm run start:overlay\" \"npm run start:adapter\"",
   "start:dapplet": "cd dapplet && npm start",
   "start:adapter": "cd adapter && npm start",
   "start:overlay": "cd overlay && npm start",
@@ -83,11 +83,11 @@ export const scriptAdapterNotServerYesOverlay = {
 export const cacheDirectoriesAdapterNotServerYesOverlay = ["dapplet/node_modules", "adapter/node_modules", "overlay/node_modules"];
 
 export const scriptAdapterYesServerNoOverlay = {
-  "postinstall": "concurrently -c \"magenta,cyan\" -n \"dapplet,adapter,server\" \"npm run install:dapplet\" \"npm run install:server\" \"npm run install:adapter\"",
+  "postinstall": "concurrently -c \"magenta,cyan,yellow\" -n \"dapplet,adapter,server\" \"npm run install:dapplet\" \"npm run install:server\" \"npm run install:adapter\"",
   "install:dapplet": "cd dapplet && npm i",
   "install:server": "cd server && npm i",
   "install:adapter": "cd adapter && npm i",
-  "start": "concurrently -c \"magenta,cyan\" -n \"dapplet,server,adapter\" \"npm run start:dapplet\" \"npm run start:server\" \"npm run start:adapter\"",
+  "start": "concurrently -c \"magenta,cyan,yellow\" -n \"dapplet,server,adapter\" \"npm run start:dapplet\" \"npm run start:server\" \"npm run start:adapter\"",
   "start:dapplet": "cd dapplet && npm start",
   "start:adapter": "cd adapter && npm start",
   "start:server": "cd overlay && npm start",
@@ -97,12 +97,12 @@ export const scriptAdapterYesServerNoOverlay = {
 export const cacheDirectoriesAdapterYesServerNoOverlay = ["dapplet/node_modules", "adapter/node_modules", "server/node_modules"];
 
 export const scriptAdapterYesServerYesOverlay = {
-  "postinstall": "concurrently -c \"magenta,cyan\" -n \"dapplet,overlay,server,adapter\" \"npm run install:dapplet\" \"npm run install:overlay\" \"npm run install:server\" \"npm run install:adapter\"",
+  "postinstall": "concurrently -c \"magenta,cyan,yellow,gray\" -n \"dapplet,overlay,server,adapter\" \"npm run install:dapplet\" \"npm run install:overlay\" \"npm run install:server\" \"npm run install:adapter\"",
   "install:dapplet": "cd dapplet && npm i",
   "install:overlay": "cd overlay && npm i",
   "install:server": "cd server && npm i",
   "install:adapter": "cd adapter && npm i",
-  "start": "concurrently -c \"magenta,cyan\" -n \"dapplet,overlay,server,adapter\" \"npm run start:dapplet\" \"npm run start:overlay\" \"npm run start:server\" \"npm run start:adapter\"",
+  "start": "concurrently -c \"magenta,cyan,yellow,gray\" -n \"dapplet,overlay,server,adapter\" \"npm run start:dapplet\" \"npm run start:overlay\" \"npm run start:server\" \"npm run start:adapter\"",
   "start:dapplet": "cd dapplet && npm start",
   "start:overlay": "cd overlay && npm start",
   "start:server": "cd server && npm start",
@@ -116,11 +116,11 @@ export const cacheDirectoriesAdapterYesServerYesOverlay = ["dapplet/node_modules
   "adapter/node_modules"];
 
 export const scriptNoAdapterYesServerYesOverlay = {
-  "postinstall": "concurrently -c \"magenta,cyan\" -n \"dapplet,overlay,server\" \"npm run install:dapplet\" \"npm run install:overlay\" \"npm run install:server\"",
+  "postinstall": "concurrently -c \"magenta,cyan,gray\" -n \"dapplet,overlay,server\" \"npm run install:dapplet\" \"npm run install:overlay\" \"npm run install:server\"",
   "install:dapplet": "cd dapplet && npm i",
   "install:overlay": "cd overlay && npm i",
   "install:server": "cd server && npm i",
-  "start": "concurrently -c \"magenta,cyan\" -n \"dapplet,overlay,server\" \"npm run start:dapplet\" \"npm run start:overlay\" \"npm run start:server\"",
+  "start": "concurrently -c \"magenta,cyan,gray\" -n \"dapplet,overlay,server\" \"npm run start:dapplet\" \"npm run start:overlay\" \"npm run start:server\"",
   "start:dapplet": "cd dapplet && npm start",
   "start:overlay": "cd overlay && npm start",
   "start:server": "cd server && npm start",
