@@ -119,7 +119,10 @@ export function notServerYesOverlay(
   const jsonMain2 = JSON.stringify(objectMain);
   writeFileSync(`./${moduleName}/package.json`, jsonMain2);
 
-  const jsonOverlay = readFileSync(`./${moduleName}/overlay/package.json`, "utf8");
+  const jsonOverlay = readFileSync(
+    `./${moduleName}/overlay/package.json`,
+    "utf8"
+  );
   const objectOverlay = JSON.parse(jsonOverlay);
   objectOverlay.author = author;
   objectOverlay.license = license;
@@ -162,7 +165,10 @@ export function yesServerNotOverlay(
   const jsonMain2 = JSON.stringify(objectMain);
   writeFileSync(`./${moduleName}/package.json`, jsonMain2);
 
-  const jsonServer = readFileSync(`./${moduleName}/server/package.json`, "utf8");
+  const jsonServer = readFileSync(
+    `./${moduleName}/server/package.json`,
+    "utf8"
+  );
   const objectServer = JSON.parse(jsonServer);
   objectServer.author = author;
   objectServer.license = license;
@@ -203,14 +209,20 @@ export function yesServerYesOverlay(
   const json2Dapplet = JSON.stringify(objectDapplet);
   writeFileSync(`./${moduleName}/dapplet/dapplet.json`, json2Dapplet);
 
-  const jsonOverlay = readFileSync(`./${moduleName}/overlay/package.json`, "utf8");
+  const jsonOverlay = readFileSync(
+    `./${moduleName}/overlay/package.json`,
+    "utf8"
+  );
   const objectOverlay = JSON.parse(jsonOverlay);
   objectOverlay.author = author;
   objectOverlay.license = license;
   const jsonOverlay2 = JSON.stringify(objectOverlay);
   writeFileSync(`./${moduleName}/overlay/package.json`, jsonOverlay2);
 
-  const jsonServer = readFileSync(`./${moduleName}/server/package.json`, "utf8");
+  const jsonServer = readFileSync(
+    `./${moduleName}/server/package.json`,
+    "utf8"
+  );
   const objectServer = JSON.parse(jsonServer);
   objectServer.author = author;
   objectServer.license = license;
@@ -248,8 +260,10 @@ export function createContext(template, moduleName, context, options) {
         "utf8"
       );
       const objectDapplet = JSON.parse(jsonDapplet);
-    context && context.push("twitter-adapter.dapplet-base.eth")
-      objectDapplet.contextIds = context ? context : ["twitter-adapter.dapplet-base.eth"];
+      context && context.push("twitter-adapter.dapplet-base.eth");
+      objectDapplet.contextIds = context
+        ? context
+        : ["twitter-adapter.dapplet-base.eth"];
       const json2Dapplet = JSON.stringify(objectDapplet);
       writeFileSync(`./${moduleName}/dapplet/dapplet.json`, json2Dapplet);
     } else {
@@ -258,10 +272,13 @@ export function createContext(template, moduleName, context, options) {
         "utf8"
       );
       const objectDapplet = JSON.parse(jsonDapplet);
-      objectDapplet.contextIds =  ["twitter-adapter.dapplet-base.eth",`${options.nameAdapter}`]
-      const newDependencies = {"twitter-adapter.dapplet-base.eth":"0.9.0"}
-      newDependencies[options.nameAdapter] = '0.1.0'
-      objectDapplet.dependencies = newDependencies
+      objectDapplet.contextIds = [
+        "twitter-adapter.dapplet-base.eth",
+        `${options.nameAdapter}`,
+      ];
+      // const newDependencies = {"twitter-adapter.dapplet-base.eth":"0.9.0"}
+      // newDependencies[options.nameAdapter] = '0.1.0'
+      // objectDapplet.dependencies = newDependencies
       const json2Dapplet = JSON.stringify(objectDapplet);
       writeFileSync(`./${moduleName}/dapplet/dapplet.json`, json2Dapplet);
 
@@ -349,12 +366,15 @@ export function optionsNoAdapterYesServerYesOverlay(moduleName) {
   writeFileSync(`./${moduleName}/package.json`, json2);
 }
 
-export function addInfoAdapter(moduleName, license, author,nameAdapter){
-  const jsonAdapter = readFileSync(`./${moduleName}/adapter/package.json`, "utf8");
+export function addInfoAdapter(moduleName, license, author, nameAdapter) {
+  const jsonAdapter = readFileSync(
+    `./${moduleName}/adapter/package.json`,
+    "utf8"
+  );
   const objectAdapter = JSON.parse(jsonAdapter);
   objectAdapter.author = author;
   objectAdapter.license = license;
-  objectAdapter.name = nameAdapter
+  objectAdapter.name = nameAdapter;
   const jsonAdapter2 = JSON.stringify(objectAdapter);
   writeFileSync(`./${moduleName}/adapter/package.json`, jsonAdapter2);
 }

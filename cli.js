@@ -10,7 +10,7 @@ let counter = 0;
 function checkNameFolderDapplet() {
   fs.stat(`./${defaultNameDapplet}`, function (err) {
     if (!err) {
-      defaultNameDapplet = defaultNameDapplet+ '-' + counter++;
+      defaultNameDapplet = defaultNameDapplet + "-" + counter++;
       return checkNameFolderDapplet();
     } else if (err.code === "ENOENT") {
     }
@@ -20,23 +20,22 @@ function checkNameFolderDapplet() {
 function checkNameFolderAdapter() {
   fs.stat(`./${defaultNameAdapter}`, function (err) {
     if (!err) {
-      defaultNameAdapter = defaultNameAdapter+ '-' + counter++;
+      defaultNameAdapter = defaultNameAdapter + "-" + counter++;
       return checkNameFolderAdapter();
     } else if (err.code === "ENOENT") {
     }
-  })
+  });
 }
 
-  function checkNameFolderInterface() {
-    fs.stat(`./${defaultNameInterface}`, function (err) {
-      if (!err) {
-        defaultNameInterface = defaultNameInterface+ '-' + counter++;
-        return checkNameFolderInterface();
-      } else if (err.code === "ENOENT") {
-      }
-    });
-  }
-
+function checkNameFolderInterface() {
+  fs.stat(`./${defaultNameInterface}`, function (err) {
+    if (!err) {
+      defaultNameInterface = defaultNameInterface + "-" + counter++;
+      return checkNameFolderInterface();
+    } else if (err.code === "ENOENT") {
+    }
+  });
+}
 
 function parseArgumentsIntoOptions(rawArgs) {
   const args = arg(
@@ -257,7 +256,7 @@ function parseArgumentsIntoOptionsAdapter(rawArgs) {
 }
 
 async function promptForMissingOptionsAdapter(options) {
-  const defaultType = "adapter";;
+  const defaultType = "adapter";
   const defaultTitle = "My Adapter";
   if (options.skipPrompts) {
     return {

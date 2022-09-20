@@ -1,5 +1,5 @@
-import { IFeature } from '@dapplets/dapplet-extension';
-import { Button, IButtonProps } from './button';
+import { IFeature } from "@dapplets/dapplet-extension";
+import { Button, IButtonProps } from "./button";
 
 type ContextBuilder = {
   [propName: string]: string;
@@ -15,25 +15,24 @@ export default class Adapter {
     button: this.adapter.createWidgetFactory(Button),
   });
 
-  
   public config = {
     POST: {
-      containerSelector: '',
-      contextSelector: '',
+      containerSelector: "body",
+      contextSelector: "",
       insPoints: {
         POST: {
-          selector: '',
-          insert: '',
+          selector: "",
+          insert: "inside",
         },
       },
-      contextBuilder: (): ContextBuilder => ({}),
+      contextBuilder: (contextElement: HTMLElement): ContextBuilder => ({
+        id: contextElement.classList.toString(),
+      }),
     },
-
   };
 
-
   constructor(
-    @Inject('dynamic-adapter.dapplet-base.eth') readonly adapter: any,
+    @Inject("dynamic-adapter.dapplet-base.eth") readonly adapter: any
   ) {
     this.adapter.configure(this.config);
   }

@@ -22,7 +22,7 @@ import {
   addInfoAdapter,
 } from "./utils";
 
-let counter = 0 
+let counter = 0;
 
 function createModule(
   type,
@@ -100,7 +100,7 @@ function updateScript(
       ? optionsAdapterNotServerNotOverlay(moduleName)
       : optionsNoAdapterNotServerNotOverlay(moduleName);
     options.optionsDappletAdapter
-      ? addInfoAdapter(moduleName, license, author,options.nameAdapter)
+      ? addInfoAdapter(moduleName, license, author, options.nameAdapter)
       : null;
   } else if (
     !options.optionsDappletServer &&
@@ -112,7 +112,7 @@ function updateScript(
       ? optionsAdapterNotServerYesOverlay(moduleName)
       : optionsNoAdapterNotServerYesOverlay(moduleName);
     options.optionsDappletAdapter
-      ? addInfoAdapter(moduleName, license, author,options.nameAdapter)
+      ? addInfoAdapter(moduleName, license, author, options.nameAdapter)
       : null;
   } else if (
     options.optionsDappletServer &&
@@ -124,7 +124,7 @@ function updateScript(
       ? optionsAdapterYesServerNotOverlay(moduleName)
       : optionsNoAdapterYesServerNotOverlay(moduleName);
     options.optionsDappletAdapter
-      ? addInfoAdapter(moduleName, license, author,options.nameAdapter)
+      ? addInfoAdapter(moduleName, license, author, options.nameAdapter)
       : null;
   } else if (
     options.optionsDappletServer &&
@@ -137,7 +137,7 @@ function updateScript(
       ? optionsAdapterYesServerYesOverlay(moduleName)
       : optionsNoAdapterYesServerYesOverlay(moduleName);
     options.optionsDappletAdapter
-      ? addInfoAdapter(moduleName, license, author,options.nameAdapter)
+      ? addInfoAdapter(moduleName, license, author, options.nameAdapter)
       : null;
   } else if (template === "adapter") {
     createAdapter(moduleName, title);
@@ -165,7 +165,7 @@ export async function createProject(options, packageInfo) {
           function checkNameFolder() {
             fs.stat(`./${nameProject}`, function (err) {
               if (!err) {
-                nameProject = nameProject+ '-' + counter++;
+                nameProject = nameProject + "-" + counter++;
                 return checkNameFolder();
               } else if (err.code === "ENOENT") {
                 createModule(
@@ -180,8 +180,7 @@ export async function createProject(options, packageInfo) {
               }
             });
           }
-          checkNameFolder()
-         
+          checkNameFolder();
         },
         skip: () => {},
       },
