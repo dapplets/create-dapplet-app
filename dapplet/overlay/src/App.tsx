@@ -29,8 +29,7 @@ const App = (props: IDappStateProps<IStorage>) => {
     sharedState && (
       <div className='wrapper'>
         <div className="title">
-          <h2>Overlay</h2>
-          <h1>Overlay</h1>
+          <h1>Dapplet Overlay</h1>
         </div>
          {sharedState.global?.userAccount === "" ? (
           <button
