@@ -1,31 +1,31 @@
-import express from 'express';
-import EventEmitter from 'events';
-import expressWs from 'express-ws';
+import EventEmitter from 'events'
+import express from 'express'
+import expressWs from 'express-ws'
 
-const PORT = process.env.PORT || 8081;
+const PORT = process.env.PORT || 8081
 
-EventEmitter.defaultMaxListeners = Infinity;
+EventEmitter.defaultMaxListeners = Infinity
 class Emitter extends EventEmitter {}
-const emitter = new Emitter();
-const callbackMap = new Map();
-let subscriptionCount = 0;
-const counter = {};
+const emitter = new Emitter()
+const callbackMap = new Map()
+let subscriptionCount = 0
+const counter = {}
 
-const app = express();
-expressWs(app);
+const app = express()
+expressWs(app)
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
 app.use(function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  next();
-});
+  res.header('Access-Control-Allow-Origin', '*')
+  next()
+})
 
 app.ws('/:feature', function (ws) {
   ws.on('message', (json) => {
-    let rpc = null;
+    let rpc = null
     try {
-      rpc = JSON.parse(json);
+      rpc = JSON.parse(json)
     } catch (err) {
       ws.send(
         JSON.stringify({
@@ -36,10 +36,10 @@ app.ws('/:feature', function (ws) {
           },
           id: null,
         })
-      );
-      return;
+      )
+      return
     }
-    const { id, method, params } = rpc;
+    const { id, method, params } = rpc
     if (
       id === undefined ||
       !method ||
@@ -55,11 +55,11 @@ app.ws('/:feature', function (ws) {
           },
           id: null,
         })
-      );
-      return;
+      )
+      return
     }
     if (method === 'subscribe') {
-      const [ctx] = params;
+      const [ctx] = params
       if (!ctx || !ctx.id) {
         ws.send(
           JSON.stringify({
@@ -70,15 +70,15 @@ app.ws('/:feature', function (ws) {
               message: 'ctx.id is required.',
             },
           })
-        );
-        return;
+        )
+        return
       }
-      const tweetId = ctx.id;
-      const subscriptionId = (++subscriptionCount).toString();
+      const tweetId = ctx.id
+      const subscriptionId = (++subscriptionCount).toString()
       if (!Object.prototype.hasOwnProperty.call(counter, tweetId)) {
         counter[tweetId] = {
           amount: 0,
-        };
+        }
       }
       ws.send(
         JSON.stringify({
@@ -86,16 +86,16 @@ app.ws('/:feature', function (ws) {
           id: id,
           result: subscriptionId,
         })
-      );
+      )
       ws.send(
         JSON.stringify({
           jsonrpc: '2.0',
           method: subscriptionId,
           params: [{ amount: counter[tweetId].amount }],
         })
-      );
+      )
       const callback = (currentId) => {
-        if (currentId !== tweetId) return;
+        if (currentId !== tweetId) return
         try {
           ws.send(
             JSON.stringify({
@@ -104,17 +104,17 @@ app.ws('/:feature', function (ws) {
               id: currentId,
               params: [{ amount: counter[currentId].amount }],
             })
-          );
+          )
         } catch (e) {
-          emitter.off('attached', callbackMap.get(subscriptionId));
+          emitter.off('attached', callbackMap.get(subscriptionId))
         }
-      };
-      emitter.on('attached', callback);
-      callbackMap.set(subscriptionId, callback);
+      }
+      emitter.on('attached', callback)
+      callbackMap.set(subscriptionId, callback)
     } else if (method === 'increment') {
-      const [currentId] = params;
-      counter[currentId].amount += 1;
-      emitter.emit('attached', currentId);
+      const [currentId] = params
+      counter[currentId].amount += 1
+      emitter.emit('attached', currentId)
     } else {
       ws.send(
         JSON.stringify({
@@ -125,9 +125,9 @@ app.ws('/:feature', function (ws) {
             message: 'Procedure not found.',
           },
         })
-      );
+      )
     }
-  });
-});
+  })
+})
 
-app.listen(PORT, () => console.log('Server started on port 8081'));
+app.listen(PORT, () => console.log('Server started on port 8081'))

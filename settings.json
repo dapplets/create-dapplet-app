@@ -1,13 +1,9 @@
 {
-    "terminal.integrated.profiles.osx": {
-     
-        "zsh": {
-            "path": "/bin/zsh -l",
-            "args": [
-                "-l"
-            ]
-        }
-  
+  "terminal.integrated.profiles.osx": {
+    "zsh": {
+      "path": "/bin/zsh -l",
+      "args": ["-l"]
+    }
   },
   "terminal.integrated.inheritEnv": false
 }

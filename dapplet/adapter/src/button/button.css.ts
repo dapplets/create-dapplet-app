@@ -1,4 +1,4 @@
-import { css } from "lit";
+import { css } from 'lit'
 
 export const styles = css`
   :host {
@@ -18,4 +18,4 @@ export const styles = css`
   .dapplet-button:hover {
     background-color: rgba(15, 20, 25, 0.1);
   }
-`;
+`

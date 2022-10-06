@@ -1,4 +1,4 @@
-import { } from '@dapplets/dapplet-extension';
+import {} from '@dapplets/dapplet-extension'
 import EXAMPLE_IMG from './icons/example.png'
 /**
  * Uncomment this to use overlay
@@ -8,17 +8,16 @@ import EXAMPLE_IMG from './icons/example.png'
 
 @Injectable
 export default class Dapplet {
-
   /** 
   Here you need to specify the name of the adapter to use, and also add it to the dapplet manifest in "dependencies" and "context IDs"
   Learn more - https://docs.dapplets.org/docs/manifest
    */
   @Inject('twitter-adapter.dapplet-base.eth')
-  public adapter: any;
+  public adapter: any
 
   /**
-    * Uncomment this to use overlay
-    */
+   * Uncomment this to use overlay
+   */
   // private state = Core.state<IStorage>({
   //   userAccount: '',
   // });
@@ -31,7 +30,6 @@ export default class Dapplet {
   //   .declare(this.api);
 
   async activate(): Promise<void> {
-
     /**
      * Uncomment this to use overlay
      */
@@ -40,22 +38,20 @@ export default class Dapplet {
     //    this.overlay.open()
     //    this.api.initializeCurrentAccount();
     //  });
-    const { button } = this.adapter.exports;
+    const { button } = this.adapter.exports
     this.adapter.attachConfig({
       POST: (ctx: any) =>
         button({
           initial: 'DEFAULT',
           DEFAULT: {
             img: EXAMPLE_IMG,
-            label:'my button',
+            label: 'my button',
             exec: async (_, me) => {
-              console.log('ctx', ctx);
-              console.log('me', me);
+              console.log('ctx', ctx)
+              console.log('me', me)
             },
           },
         }),
-    });
+    })
   }
 }
-
-

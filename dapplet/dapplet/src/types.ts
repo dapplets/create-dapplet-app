@@ -1,8 +1,8 @@
 export interface IStorage {
-  userAccount: string;
+  userAccount: string
 }
 
 export interface IBridge {
-  login: () => Promise<void>;
-  logout: () => Promise<void>;
+  login: () => Promise<void>
+  logout: () => Promise<void>
 }

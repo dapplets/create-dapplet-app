@@ -2,12 +2,10 @@
 
 This project was bootstrapped with [Create Dapplet App](https://github.com/dapplets/create-dapplet-app)
 
-
 ## Getting Started
 
-1.  Go to module folder and `npm i` to install dependencies.  
+1.  Go to module folder and `npm i` to install dependencies.
 2.  `npm start` to run module at localhost.
-
 
 ### Building
 
@@ -18,6 +16,6 @@ More about using the Web Components for adapter [here](https://docs.dapplets.org
 
 ## Learn more
 
-* **Dapplets Project** - [dapplets site](https://dapplets.org/)
-* **Documentation** - [documentation](https://docs.dapplets.org/docs/)
-* **GitHub Project Dapplets** - [github](https://github.com/dapplets)
+- **Dapplets Project** - [dapplets site](https://dapplets.org/)
+- **Documentation** - [documentation](https://docs.dapplets.org/docs/)
+- **GitHub Project Dapplets** - [github](https://github.com/dapplets)
