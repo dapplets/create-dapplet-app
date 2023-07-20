@@ -15,7 +15,7 @@ const showAddress = () => ({
 
 export default [
   {
-    input: 'src/index.ts',
+    input: 'dapplet.json',
     output: [
       {
         file: 'lib/index.js',

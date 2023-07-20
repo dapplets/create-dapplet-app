@@ -2,13 +2,15 @@
   "name": "",
   "version": "0.1.0",
   "description": "",
-  "main": "lib/index.js",
+  "author": "",
+  "license": "",
+  "title": "",
   "scripts": {
     "start": "rollup -w --config rollup.config.js",
     "build": "rollup --config rollup.config.js"
   },
   "devDependencies": {
-    "@dapplets/dapplet-extension": "latest",
+    "@dapplets/dapplet-extension": "develop",
     "@rollup/plugin-commonjs": "^17.1.0",
     "@rollup/plugin-image": "^2.0.6",
     "@rollup/plugin-json": "^4.1.0",

@@ -1,13 +1,19 @@
 {
-  "name": { "$ref": "package.json#/name" },
+  "name": {
+    "$ref": "package.json#/name"
+  },
   "branch": "default",
-  "version": { "$ref": "package.json#/version" },
-  "type": "ADAPTER",
+  "version": {
+    "$ref": "package.json#/version"
+  },
+  "type": "CONFIG",
   "title": "",
-  "description": { "$ref": "package.json#/description" },
-  "main": { "$ref": "package.json#/main" },
+  "description": {
+    "$ref": "package.json#/description"
+  },
+  "main": {
+    "$ref": "package.json#/main"
+  },
   "contextIds": [],
-  "dependencies": {
-    "dynamic-adapter.dapplet-base.eth": "0.6.22"
-  }
+  "dependencies": {}
 }

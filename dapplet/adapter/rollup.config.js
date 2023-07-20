@@ -9,13 +9,13 @@ const showAddress = () => ({
   load: () =>
     console.log(
       '\x1b[35m%s\x1b[0m',
-      `Current registry address: http://localhost:3002/dapplet.json`
+      `Current registry address: http://localhost:3003/dapplet.json`
     ),
 })
 
 export default [
   {
-    input: 'src/index.ts',
+    input: 'dapplet.json',
     output: [
       {
         file: 'lib/index.js',
@@ -29,7 +29,7 @@ export default [
       resolve({ browser: true }),
       commonjs(),
       image(),
-      serve({ port: 3002 }),
+      serve({ port: 3003 }),
       showAddress(),
     ],
   },

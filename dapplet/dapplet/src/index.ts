@@ -1,10 +1,9 @@
 import {} from '@dapplets/dapplet-extension'
-import EXAMPLE_IMG from './icons/example.png'
 /**
  * Uncomment this to use overlay
  */
-// import { Api } from './api';
-// import { IBridge, IStorage } from './types';
+import { Api } from './api';
+import { IBridge, IStorage } from './types';
 
 @Injectable
 export default class Dapplet {
@@ -12,9 +11,11 @@ export default class Dapplet {
   Here you need to specify the name of the adapter to use, and also add it to the dapplet manifest in "dependencies" and "context IDs"
   Learn more - https://docs.dapplets.org/docs/manifest
    */
-  @Inject('twitter-adapter.dapplet-base.eth')
-  public adapter: any
-
+  @Inject('twitter-config.dapplet-base.eth')
+  public adapter
+  private _globalContext = {}
+  private _$
+  private _initWidgetFunctions: { [name: string]: () => Promise<void> } = {}
   /**
    * Uncomment this to use overlay
    */
@@ -28,30 +29,38 @@ export default class Dapplet {
   // private overlay = Core.overlay<IBridge>({ name: 'overlay', title: '' })
   //   .useState(this.state)
   //   .declare(this.api);
+  executeInitWidgetFunctions = (): Promise<void[]> =>
+    Promise.all(Object.values(this._initWidgetFunctions).map((fn) => fn()))
 
   async activate(): Promise<void> {
-    /**
-     * Uncomment this to use overlay
-     */
-    //  await this.api.initializeCurrentAccount();
-    //  Core.onAction(() => {
-    //    this.overlay.open()
-    //    this.api.initializeCurrentAccount();
-    //  });
+    await this.pasteWidgets()
+    // Core.onAction(async() => {
+    //   this.overlay.open()
+    //   this.api.initializeCurrentAccount()
+    // })
+  }
+
+  async pasteWidgets(): Promise<void> {
     const { button } = this.adapter.exports
-    this.adapter.attachConfig({
-      POST: (ctx: any) =>
-        button({
-          initial: 'DEFAULT',
-          DEFAULT: {
-            img: EXAMPLE_IMG,
-            label: 'my button',
-            exec: async (_, me) => {
-              console.log('ctx', ctx)
-              console.log('me', me)
+    const { $ } = this.adapter.attachConfig({
+      GLOBAL: (global) => {
+        Object.assign(this._globalContext, global)
+      },
+      PROFILE: () => {
+        return [
+          button({
+            initial: 'DEFAULT',
+            DEFAULT: {
+              label: 'my button',
+              exec: async (_, me) => {
+                console.log('_', _)
+                console.log('me', me)
+              },
             },
-          },
-        }),
+          }),
+        ]
+      },
     })
+    this._$ = $
   }
 }
