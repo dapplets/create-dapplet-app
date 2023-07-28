@@ -1,0 +1,14 @@
+{
+  "name": "my-adapter",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.json",
+  "scripts": {
+    "start": "serve -l 8080"
+  },
+  "devDependencies": {
+    "serve": "^14.2.0"
+  },
+  "license": "",
+  "author": ""
+}

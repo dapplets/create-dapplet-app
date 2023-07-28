@@ -1,0 +1,14 @@
+{
+  "name": "my-virtual-adapter",
+  "version": "0.1.0",
+  "description": "",
+  "author": "",
+  "license": "",
+  "title": "",
+  "scripts": {
+    "start": "serve -l 8080"
+  },
+  "devDependencies": {
+    "serve": "^14.2.0"
+  }
+}

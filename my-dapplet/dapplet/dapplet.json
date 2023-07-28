@@ -1,0 +1,29 @@
+{
+  "name": {
+    "$ref": "package.json#/name"
+  },
+  "branch": "default",
+  "version": {
+    "$ref": "package.json#/version"
+  },
+  "type": "FEATURE",
+  "title": "My Dapplet",
+  "description": {
+    "$ref": "package.json#/description"
+  },
+  "main": {
+    "$ref": "package.json#/main"
+  },
+  "icon": "src/icons/no-logo.png",
+  "contextIds": [
+    "my-adapter"
+  ],
+  "config": {
+    "schema": "config/schema.json",
+    "default": "config/default.json"
+  },
+  "overlays": {},
+  "dependencies": {
+    "my-adapter": "0.1.0"
+  }
+}
