@@ -7,7 +7,7 @@
     "$ref": "package.json#/version"
   },
   "type": "FEATURE",
-  "title": "",
+  "title": "My Dapplet",
   "description": {
     "$ref": "package.json#/description"
   },
@@ -16,16 +16,14 @@
   },
   "icon": "src/icons/no-logo.png",
   "contextIds": [
-    "twitter-config.dapplet-base.eth"
+    "my-adapter"
   ],
   "config": {
     "schema": "config/schema.json",
     "default": "config/default.json"
   },
-  "overlays": {
-    "overlay": "http://localhost:3002"
-  },
+  "overlays": {},
   "dependencies": {
-    "twitter-config.dapplet-base.eth": "0.1.5"
+    "my-adapter": "0.1.0"
   }
 }

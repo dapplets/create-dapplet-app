@@ -7,13 +7,15 @@
     "$ref": "package.json#/version"
   },
   "type": "CONFIG",
-  "title": "",
+  "title": "My Adapter",
   "description": {
     "$ref": "package.json#/description"
   },
   "main": {
     "$ref": "package.json#/main"
   },
-  "contextIds": [],
+  "contextIds": [
+    "twitter.com"
+  ],
   "dependencies": {}
 }

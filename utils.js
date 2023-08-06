@@ -47,12 +47,12 @@ export function notOverlayNotServer(moduleName, title, description, author, lice
   const jsonMain2 = JSON.stringify(objectMain)
   writeFileSync(`./${moduleName}/package.json`, jsonMain2)
 
-  fs.unlink(`./${moduleName}/dapplet/src/api.ts`, (err) => {
-    if (err) throw err
-  })
-  fs.unlink(`./${moduleName}/dapplet/src/types.ts`, (err) => {
-    if (err) throw err
-  })
+  // fs.unlink(`./${moduleName}/dapplet/src/api.ts`, (err) => {
+  //   if (err) throw err
+  // })
+  // fs.unlink(`./${moduleName}/dapplet/src/types.ts`, (err) => {
+  //   if (err) throw err
+  // })
 }
 
 export function notServerYesOverlay(moduleName, title, description, author, license) {

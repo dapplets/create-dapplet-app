@@ -2,8 +2,8 @@ import {} from '@dapplets/dapplet-extension'
 /**
  * Uncomment this to use overlay
  */
-import { Api } from './api';
-import { IBridge, IStorage } from './types';
+// import { Api } from './api'
+// import { IBridge, IStorage } from './types'
 
 @Injectable
 export default class Dapplet {
@@ -11,7 +11,7 @@ export default class Dapplet {
   Here you need to specify the name of the adapter to use, and also add it to the dapplet manifest in "dependencies" and "context IDs"
   Learn more - https://docs.dapplets.org/docs/manifest
    */
-  @Inject('twitter-config.dapplet-base.eth')
+  @Inject('my-adapter')
   public adapter
   private _globalContext = {}
   private _$
@@ -46,14 +46,14 @@ export default class Dapplet {
       GLOBAL: (global) => {
         Object.assign(this._globalContext, global)
       },
-      PROFILE: () => {
+      BODY: (ctx) => {
         return [
           button({
             initial: 'DEFAULT',
             DEFAULT: {
               label: 'my button',
               exec: async (_, me) => {
-                console.log('_', _)
+                console.log('ctx', ctx)
                 console.log('me', me)
               },
             },
