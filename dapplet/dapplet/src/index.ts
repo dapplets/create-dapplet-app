@@ -15,7 +15,8 @@ export default class Dapplet {
   public adapter
   private _globalContext = {}
   private _$
-  private _initWidgetFunctions: { [name: string]: () => Promise<void> } = {}
+
+  
   /**
    * Uncomment this to use overlay
    */
@@ -29,20 +30,13 @@ export default class Dapplet {
   // private overlay = Core.overlay<IBridge>({ name: 'overlay', title: '' })
   //   .useState(this.state)
   //   .declare(this.api);
-  executeInitWidgetFunctions = (): Promise<void[]> =>
-    Promise.all(Object.values(this._initWidgetFunctions).map((fn) => fn()))
+
+
+  
 
   async activate(): Promise<void> {
-    await this.pasteWidgets()
-    // Core.onAction(async() => {
-    //   this.overlay.open()
-    //   this.api.initializeCurrentAccount()
-    // })
-  }
-
-  async pasteWidgets(): Promise<void> {
     const { button } = this.adapter.exports
-    const { $ } = this.adapter.attachConfig({
+    this.adapter.attachConfig({
       GLOBAL: (global) => {
         Object.assign(this._globalContext, global)
       },
@@ -61,6 +55,10 @@ export default class Dapplet {
         ]
       },
     })
-    this._$ = $
+ 
   }
+   // Core.onAction(async() => {
+    //   this.overlay.open()
+    //   this.api.initializeCurrentAccount()
+    // })
 }

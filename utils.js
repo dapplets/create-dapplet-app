@@ -31,7 +31,7 @@ export function notOverlayNotServer(moduleName, title, description, author, lice
 
   const json1 = readFileSync(`./${moduleName}/dapplet/package.json`, 'utf8')
   const object = JSON.parse(json1)
-  object.name = moduleName
+  object.name = moduleName.toLowerCase()
   object.title = title
   object.dependencies = {}
   object.description = description
@@ -64,7 +64,7 @@ export function notServerYesOverlay(moduleName, title, description, author, lice
 
   const json1 = readFileSync(`./${moduleName}/dapplet/package.json`, 'utf8')
   const object = JSON.parse(json1)
-  object.name = moduleName
+  object.name = moduleName.toLowerCase()
   object.title = title
   object.description = description
   object.author = author
@@ -110,7 +110,7 @@ export function yesServerNotOverlay(moduleName, title, description, author, lice
   const json1 = readFileSync(`./${moduleName}/dapplet/package.json`, 'utf8')
   const object = JSON.parse(json1)
   object.dependencies = {}
-  object.name = moduleName
+  object.name = moduleName.toLowerCase()
   object.title = title
   object.description = description
   object.author = author
@@ -143,7 +143,7 @@ export function yesServerNotOverlay(moduleName, title, description, author, lice
 export function yesServerYesOverlay(moduleName, title, description, author, license) {
   const json1 = readFileSync(`./${moduleName}/dapplet/package.json`, 'utf8')
   const object = JSON.parse(json1)
-  object.name = moduleName
+  object.name = moduleName.toLowerCase()
   object.title = title
   object.description = description
   object.author = author
@@ -199,23 +199,27 @@ export function createContext(template, moduleName, context, options) {
     if (!options.optionsDappletAdapter) {
       const jsonDapplet = readFileSync(`./${moduleName}/dapplet/dapplet.json`, 'utf8')
       const objectDapplet = JSON.parse(jsonDapplet)
-      context && context.push('twitter-adapter.dapplet-base.eth')
-      objectDapplet.contextIds = context ? context : ['twitter-adapter.dapplet-base.eth']
+      context && context.push('twitter-config.dapplet-base.eth')
+      objectDapplet.contextIds = context ? context : ['twitter-config.dapplet-base.eth']
+      const newDependencies = { 'twitter-config.dapplet-base.eth': '0.1.5' }
+
+      objectDapplet.dependencies = newDependencies
       const json2Dapplet = JSON.stringify(objectDapplet)
       writeFileSync(`./${moduleName}/dapplet/dapplet.json`, json2Dapplet)
     } else {
       const jsonDapplet = readFileSync(`./${moduleName}/dapplet/dapplet.json`, 'utf8')
       const objectDapplet = JSON.parse(jsonDapplet)
-      objectDapplet.contextIds = ['twitter-adapter.dapplet-base.eth', `${options.nameAdapter}`]
-      // const newDependencies = {"twitter-adapter.dapplet-base.eth":"0.9.0"}
-      // newDependencies[options.nameAdapter] = '0.1.0'
-      // objectDapplet.dependencies = newDependencies
+      context && context.push(`${options.nameAdapter}`)
+      objectDapplet.contextIds = context ? context : []
+      const newDependencies = {}
+      newDependencies[options.nameAdapter] = '0.1.0'
+      objectDapplet.dependencies = newDependencies
       const json2Dapplet = JSON.stringify(objectDapplet)
       writeFileSync(`./${moduleName}/dapplet/dapplet.json`, json2Dapplet)
 
       const jsonAdapter = readFileSync(`./${moduleName}/adapter/dapplet.json`, 'utf8')
       const objectAdapter = JSON.parse(jsonAdapter)
-      objectAdapter.contextIds = context ? context : []
+
       const json2Adapter = JSON.stringify(objectAdapter)
       writeFileSync(`./${moduleName}/adapter/dapplet.json`, json2Adapter)
     }
@@ -299,7 +303,7 @@ export function addInfoAdapter(moduleName, license, author, nameAdapter) {
   const objectAdapter = JSON.parse(jsonAdapter)
   objectAdapter.author = author
   objectAdapter.license = license
-  objectAdapter.name = nameAdapter
+  objectAdapter.name = nameAdapter.toLowerCase()
   const jsonAdapter2 = JSON.stringify(objectAdapter)
   writeFileSync(`./${moduleName}/adapter/package.json`, jsonAdapter2)
 }
