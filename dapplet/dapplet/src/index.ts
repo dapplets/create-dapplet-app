@@ -1,9 +1,4 @@
 import {} from '@dapplets/dapplet-extension'
-/**
- * Uncomment this to use overlay
- */
-// import { Api } from './api'
-// import { IBridge, IStorage } from './types'
 
 @Injectable
 export default class Dapplet {
@@ -11,28 +6,15 @@ export default class Dapplet {
   Here you need to specify the name of the adapter to use, and also add it to the dapplet manifest in "dependencies" and "context IDs"
   Learn more - https://docs.dapplets.org/docs/manifest
    */
-  @Inject('my-adapter')
+  @Inject('twitter-config.dapplet-base.eth')
   public adapter
   private _globalContext = {}
-  private _$
 
-  
   /**
    * Uncomment this to use overlay
    */
-  // private state = Core.state<IStorage>({
-  //   userAccount: '',
-  // });
-  // private api = new Api({
-  //   state: this.state
-  // });
 
-  // private overlay = Core.overlay<IBridge>({ name: 'overlay', title: '' })
-  //   .useState(this.state)
-  //   .declare(this.api);
-
-
-  
+  // private overlay = Core.overlay({ name: 'overlay', title: '' })
 
   async activate(): Promise<void> {
     const { button } = this.adapter.exports
@@ -40,7 +22,7 @@ export default class Dapplet {
       GLOBAL: (global) => {
         Object.assign(this._globalContext, global)
       },
-      BODY: (ctx) => {
+      PROFILE: (ctx) => {
         return [
           button({
             initial: 'DEFAULT',
@@ -55,10 +37,9 @@ export default class Dapplet {
         ]
       },
     })
- 
-  }
-   // Core.onAction(async() => {
+    // Core.onAction(async() => {
     //   this.overlay.open()
-    //   this.api.initializeCurrentAccount()
+
     // })
+  }
 }

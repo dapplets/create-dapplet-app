@@ -15,7 +15,12 @@
     "$ref": "package.json#/main"
   },
   "contextIds": [
-    "twitter.com"
+    "twitter.com",
+    "http://twitter.com/",
+    "https://twitter.com/"
   ],
-  "dependencies": {}
+  "dependencies": {},
+  "interfaces": {
+    "social-virtual-config.dapplet-base.eth": "0.1.0"
+  }
 }

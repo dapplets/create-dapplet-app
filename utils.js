@@ -59,6 +59,8 @@ export function notServerYesOverlay(moduleName, title, description, author, lice
   const jsonDapplet = readFileSync(`./${moduleName}/dapplet/dapplet.json`, 'utf8')
   const objectDapplet = JSON.parse(jsonDapplet)
   objectDapplet.title = title
+  const objectOverlayDapplet = { overlays: 'https://localhost:8080' }
+  objectDapplet.overlays = objectOverlayDapplet
   const json2Dapplet = JSON.stringify(objectDapplet)
   writeFileSync(`./${moduleName}/dapplet/dapplet.json`, json2Dapplet)
 
@@ -69,6 +71,7 @@ export function notServerYesOverlay(moduleName, title, description, author, lice
   object.description = description
   object.author = author
   object.license = license
+
   const json2 = JSON.stringify(object)
   writeFileSync(`./${moduleName}/dapplet/package.json`, json2)
 
@@ -153,7 +156,10 @@ export function yesServerYesOverlay(moduleName, title, description, author, lice
 
   const jsonDapplet = readFileSync(`./${moduleName}/dapplet/dapplet.json`, 'utf8')
   const objectDapplet = JSON.parse(jsonDapplet)
+  const objectOverlayDapplet = { overlays: 'https://localhost:8080' }
+  objectDapplet.overlays = objectOverlayDapplet
   objectDapplet.title = title
+
   const json2Dapplet = JSON.stringify(objectDapplet)
   writeFileSync(`./${moduleName}/dapplet/dapplet.json`, json2Dapplet)
 
@@ -210,7 +216,9 @@ export function createContext(template, moduleName, context, options) {
       const jsonDapplet = readFileSync(`./${moduleName}/dapplet/dapplet.json`, 'utf8')
       const objectDapplet = JSON.parse(jsonDapplet)
       context && context.push(`${options.nameAdapter}`)
-      objectDapplet.contextIds = context ? context : []
+      const newContext = []
+      newContext.push(options.nameAdapter)
+      objectDapplet.contextIds = context ? context : newContext
       const newDependencies = {}
       newDependencies[options.nameAdapter] = '0.1.0'
       objectDapplet.dependencies = newDependencies

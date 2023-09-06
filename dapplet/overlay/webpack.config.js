@@ -2,6 +2,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const WebpackAssetsManifest = require('webpack-assets-manifest')
+const fs = require('fs')
 
 module.exports = {
   mode: 'development',
@@ -23,14 +24,7 @@ module.exports = {
             },
           },
         ],
-        include: [
-          path.resolve(__dirname, 'src'),
-          path.resolve(__dirname, 'node_modules/@loot-box/common'),
-        ],
-      },
-      {
-        test: /\.s[ac]ss$/i,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
+        include: path.resolve(__dirname, 'src'),
       },
       {
         test: /\.css$/,
@@ -38,7 +32,10 @@ module.exports = {
       },
       {
         test: [/\.eot$/, /\.ttf$/, /\.woff$/, /\.woff2$/, /\.svg$/, /\.png$/],
-        use: 'file-loader',
+        loader: 'file-loader',
+        options: {
+          name: '[name].[sha512:hash:6].[ext]',
+        },
       },
     ],
   },
@@ -52,8 +49,11 @@ module.exports = {
   ],
   devServer: {
     contentBase: path.join(__dirname, 'build'),
-    port: 3002,
-    https: true,
+    port: 8080,
+    https: {
+      key: fs.readFileSync('src/secret/localhost/localhost.decrypted.key'),
+      cert: fs.readFileSync('src/secret/localhost/localhost.crt'),
+    },
     hot: false,
     inline: false,
     liveReload: false,

@@ -16,7 +16,7 @@
   },
   "icon": "src/icons/no-logo.png",
   "contextIds": [
-    "my-adapter"
+    "twitter-config.dapplet-base.eth"
   ],
   "config": {
     "schema": "config/schema.json",
