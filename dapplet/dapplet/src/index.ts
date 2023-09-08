@@ -4,7 +4,7 @@ import pkg from '../dapplet.json'
 
 @Injectable
 export default class Dapplet {
-  @Inject(Object.keys(pkg.dependencies)[0])
+  @Inject(Object.keys(pkg.dependencies)[0]) // It's better to explicitly specify the adapter name
   public adapter
   private _globalContext = {}
 
