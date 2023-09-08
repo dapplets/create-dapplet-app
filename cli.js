@@ -157,7 +157,7 @@ async function promptForMissingOptionsDapplets(options) {
     return {
       ...options,
       type: options.type || defaultType,
-      name: options.name || defaultNameDapplet,
+      name: options.name.toLowerCase() || defaultNameDapplet,
       title: options.title || defaultTitle,
       description: options.optionsDappletDescription || '',
       context: options.optionsContextID || null,
@@ -262,7 +262,7 @@ async function promptForMissingOptionsAdapter(options) {
     return {
       ...options,
       type: options.type || defaultType,
-      name: options.name || defaultNameAdapter,
+      name: options.name.toLowerCase() || defaultNameAdapter,
       title: options.title || defaultTitle,
       context: options.optionsContextID || null,
     }
@@ -336,7 +336,7 @@ async function promptForMissingOptionsInterface(options) {
     return {
       ...options,
       type: options.type || defaultType,
-      name: options.name || defaultNameInterface,
+      name: options.name.toLowerCase() || defaultNameInterface,
       title: options.title || defaultTitle,
     }
   }
@@ -400,7 +400,7 @@ async function promptForMissingOptionsDappletAdapter(options, name, author) {
   if (options.skipPrompts) {
     return {
       ...options,
-      nameAdapter: options.nameAdapter || defaultNameAdapter,
+      nameAdapter: options.nameAdapter.toLowerCase() || defaultNameAdapter,
     }
   }
 
@@ -419,7 +419,7 @@ async function promptForMissingOptionsDappletAdapter(options, name, author) {
 
   return {
     ...options,
-    nameAdapter: options.nameAdapter || answers.nameAdapter,
+    nameAdapter: options.nameAdapteroptions || answers.nameAdapter,
   }
 }
 

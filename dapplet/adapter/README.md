@@ -4,8 +4,8 @@ This project was bootstrapped with [Create Dapplet App](https://github.com/dappl
 
 ## Getting Started
 
-1.  Go to module folder and `npm i` for loading dependences.
-2.  `npm start` to run module in localhost.
+1.  Go to module folder and `npm i` to install dependencies.
+2.  `npm start` to run module at localhost.
 
 ### Building
 

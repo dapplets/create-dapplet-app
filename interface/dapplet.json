@@ -1,9 +1,14 @@
 {
-  "name": { "$ref": "package.json#/name" },
+  "name": {
+    "$ref": "package.json#/name"
+  },
   "branch": "default",
-  "version": { "$ref": "package.json#/version" },
+  "version": {
+    "$ref": "package.json#/version"
+  },
   "type": "INTERFACE",
-  "title": "",
-  "description": { "$ref": "package.json#/description" },
-  "main": { "$ref": "package.json#/main" }
+  "title": "My Virtual Adapter",
+  "description": {
+    "$ref": "package.json#/description"
+  }
 }
