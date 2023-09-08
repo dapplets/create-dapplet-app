@@ -1,12 +1,10 @@
 import {} from '@dapplets/dapplet-extension'
 import EXAMPLE_IMG from './icons/example.png'
+import pkg from '../dapplet.json'
 @Injectable
 export default class Dapplet {
-  /** 
-  Here you need to specify the name of the adapter to use, and also add it to the dapplet manifest in "dependencies" and "context IDs"
-  Learn more - https://docs.dapplets.org/docs/manifest
-   */
-  @Inject('twitter-config.dapplet-base.eth')
+
+  @Inject(Object.keys(pkg.dependencies)[0])
   public adapter
   private _globalContext = {}
 
