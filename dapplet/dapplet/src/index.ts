@@ -1,5 +1,5 @@
 import {} from '@dapplets/dapplet-extension'
-
+import EXAMPLE_IMG from './icons/example.png'
 @Injectable
 export default class Dapplet {
   /** 
@@ -20,7 +20,7 @@ export default class Dapplet {
     const { button } = this.adapter.exports
     this.adapter.attachConfig({
       GLOBAL: (global) => {
-        Object.assign(this._globalContext, global)
+        this._globalContext = global
       },
       PROFILE: (ctx) => {
         return [
@@ -28,6 +28,7 @@ export default class Dapplet {
             initial: 'DEFAULT',
             DEFAULT: {
               label: 'my button',
+              img: EXAMPLE_IMG,
               exec: async (_, me) => {
                 console.log('ctx', ctx)
                 console.log('me', me)
