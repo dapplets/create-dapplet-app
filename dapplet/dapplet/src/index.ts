@@ -1,9 +1,9 @@
 import {} from '@dapplets/dapplet-extension'
 import EXAMPLE_IMG from './icons/example.png'
 import pkg from '../dapplet.json'
+
 @Injectable
 export default class Dapplet {
-
   @Inject(Object.keys(pkg.dependencies)[0])
   public adapter
   private _globalContext = {}
@@ -30,6 +30,7 @@ export default class Dapplet {
               exec: async (_, me) => {
                 console.log('ctx', ctx)
                 console.log('me', me)
+                console.log('this._globalContext', this._globalContext)
               },
             },
           }),
