@@ -59,7 +59,7 @@ export function notServerYesOverlay(moduleName, title, description, author, lice
   const jsonDapplet = readFileSync(`./${moduleName}/dapplet/dapplet.json`, 'utf8')
   const objectDapplet = JSON.parse(jsonDapplet)
   objectDapplet.title = title
-  const objectOverlayDapplet = { overlay: 'https://localhost:8080' }
+  const objectOverlayDapplet = { overlay: 'https://localhost:3002' }
   objectDapplet.overlays = objectOverlayDapplet
   const json2Dapplet = JSON.stringify(objectDapplet)
   writeFileSync(`./${moduleName}/dapplet/dapplet.json`, json2Dapplet)
@@ -156,7 +156,7 @@ export function yesServerYesOverlay(moduleName, title, description, author, lice
 
   const jsonDapplet = readFileSync(`./${moduleName}/dapplet/dapplet.json`, 'utf8')
   const objectDapplet = JSON.parse(jsonDapplet)
-  const objectOverlayDapplet = { overlay: 'https://localhost:8080' }
+  const objectOverlayDapplet = { overlay: 'https://localhost:3002' }
   objectDapplet.overlays = objectOverlayDapplet
   objectDapplet.title = title
 
