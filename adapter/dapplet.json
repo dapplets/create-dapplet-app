@@ -20,7 +20,5 @@
     "https://twitter.com/"
   ],
   "dependencies": {},
-  "interfaces": {
-    "social-virtual-config.dapplet-base.eth": "0.1.0"
-  }
+  "interfaces": {}
 }
