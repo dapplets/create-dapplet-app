@@ -19,6 +19,7 @@ import {
   optionsNoAdapterYesServerYesOverlay,
   yesServerNotOverlay,
   yesServerYesOverlay,
+  addGitIgnore,
 } from './utils'
 
 let counter = 0
@@ -59,6 +60,7 @@ function updateConfiguration(moduleName, options, template) {
     ? null
     : fs.rmSync(`./${moduleName}/overlay`, { recursive: true, force: true })
 }
+
 function updateScript(moduleName, title, description, options, author, license, template, context) {
   if (!options.optionsDappletServer && !options.optionsDappletOverlay && template === 'dapplet') {
     notOverlayNotServer(moduleName, title, description, author, license)
@@ -111,6 +113,10 @@ function updateScript(moduleName, title, description, options, author, license, 
   } else if (template === 'interface') {
     createInterface(moduleName, title)
   }
+  if (template === 'dapplet') {
+    addGitIgnore(moduleName, template)
+  }
+
   createContext(template, moduleName, context, options)
 }
 

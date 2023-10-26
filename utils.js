@@ -1,4 +1,4 @@
-import fs, { readFileSync, writeFileSync } from 'fs'
+import fs, { copyFile, readFileSync, writeFileSync } from 'fs'
 import {
   cacheDirectories,
   cacheDirectoriesAdapterNotServerNotOverlay,
@@ -134,13 +134,6 @@ export function yesServerNotOverlay(moduleName, title, description, author, lice
   objectServer.license = license
   const jsonServer2 = JSON.stringify(objectServer)
   writeFileSync(`./${moduleName}/server/package.json`, jsonServer2)
-
-  fs.unlink(`./${moduleName}/dapplet/src/api.ts`, (err) => {
-    if (err) throw err
-  })
-  fs.unlink(`./${moduleName}/dapplet/src/types.ts`, (err) => {
-    if (err) throw err
-  })
 }
 
 export function yesServerYesOverlay(moduleName, title, description, author, license) {
@@ -314,4 +307,13 @@ export function addInfoAdapter(moduleName, license, author, nameAdapter) {
   objectAdapter.name = nameAdapter.toLowerCase()
   const jsonAdapter2 = JSON.stringify(objectAdapter)
   writeFileSync(`./${moduleName}/adapter/package.json`, jsonAdapter2)
+}
+
+export function addGitIgnore(moduleName, module) {
+  copyFile(`./${moduleName}/${module}/.gitignore`, `./${moduleName}/.gitignore`, (err) => {
+    if (err) {
+      console.log('error when creating .gitignore file')
+      return
+    }
+  })
 }
