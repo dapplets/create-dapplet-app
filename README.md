@@ -1,4 +1,5 @@
-<img width="1245" alt="cda" src="https://user-images.githubusercontent.com/43613968/225230403-31cf9371-f5e9-49ca-9f96-860ea758b1fb.png">
+![create-dapplet-app](https://github.com/dapplets/create-dapplet-app/blob/009c4a174c2eb75bd808baa6e3d92de70b9afde0/docs/dapp-app.png#gh-dark-mode-only)
+![create-dapplet-app](https://github.com/dapplets/create-dapplet-app/blob/009c4a174c2eb75bd808baa6e3d92de70b9afde0/docs/dapp-app-light.png#gh-light-mode-only)
 
 # Create Dapplet App
 
