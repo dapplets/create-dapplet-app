@@ -1,5 +1,5 @@
-![create-dapplet-app](https://github.com/dapplets/create-dapplet-app/blob/009c4a174c2eb75bd808baa6e3d92de70b9afde0/docs/dapp-app.png#gh-dark-mode-only)
-![create-dapplet-app](https://github.com/dapplets/create-dapplet-app/blob/009c4a174c2eb75bd808baa6e3d92de70b9afde0/docs/dapp-app-light.png#gh-light-mode-only)
+![create-dapplet-app](/docs/dark.png#gh-dark-mode-only)
+![create-dapplet-app](/docs/light.png#gh-light-mode-only)
 
 # Create Dapplet App
 
